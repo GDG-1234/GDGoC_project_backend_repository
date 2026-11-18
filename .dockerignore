@@ -1,0 +1,14 @@
+.venv
+.env
+.env.*
+!.env.example
+.git
+.github
+.idea
+.vscode
+__pycache__
+.ruff_cache
+.pytest_cache
+tests
+docs
+seeds/dubeogi
