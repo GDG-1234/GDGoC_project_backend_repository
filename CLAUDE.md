@@ -21,24 +21,35 @@ uv run alembic upgrade head               # 마이그레이션 적용
 docker compose up -d db                   # 로컬 PostgreSQL
 ```
 
-## 폴더 구조 (도메인 단위)
+## 폴더 구조 (프로그램 단위)
+
+서비스의 메인은 AI 채팅이고, 길안내 같은 기능은 채팅이 부르는 프로그램(skill)이다.
+**프로그램 하나 = 폴더 하나**로 `app/programs/` 아래에 둔다.
 
 ```
 app/
 ├── main.py            # FastAPI 앱 생성, 라우터 등록만 한다
 ├── core/              # 설정(config.py), DB 세션(database.py), 보안(security.py) — 공용
 ├── common/            # 공용 예외, 응답 형식, 유틸
-└── domains/
-    └── <도메인>/       # 예: user, post
+├── auth/              # 로그인, 사용자
+├── chat/              # 채팅 창구, 대화 기록, AI 서비스 호출
+└── programs/          # 채팅이 부르는 프로그램(skill)
+    └── <프로그램>/     # 예: navigation(길안내), cafeteria(학식)
         ├── router.py      # 엔드포인트. 요청/응답 처리만 한다
         ├── schemas.py     # Pydantic 요청/응답 모델
         ├── models.py      # SQLAlchemy 모델
         ├── service.py     # 비즈니스 로직
         └── repository.py  # DB 접근
 tests/
-└── domains/<도메인>/
+├── auth/, chat/
+└── programs/<프로그램>/
 migrations/            # Alembic
+prototype/             # 길안내 검증용 구현. navigation 이전이 끝나면 지운다 (ruff 검사 제외)
 ```
+
+- `auth/`, `chat/`도 프로그램 폴더와 같은 파일 구성(router, schemas, models, service, repository)을 따른다.
+- 한 프로그램 안의 기능은 쪼개지 않는다. 예: 건물 정보는 별도 프로그램이 아니라 `navigation/` 안에 둔다.
+- 다른 프로그램의 router, repository, models를 import하지 않는다. 필요하면 그 프로그램의 `service.py` 함수만 쓴다.
 
 ## 코드 규칙
 
@@ -54,7 +65,7 @@ migrations/            # Alembic
 
 ## AI가 지켜야 할 것 (충돌 방지)
 
-- **작업 범위 밖의 파일을 고치지 않는다.** 특히 다른 도메인 폴더, `app/core/`, `app/common/`은 요청이 없으면 건드리지 않는다.
+- **작업 범위 밖의 파일을 고치지 않는다.** 특히 다른 프로그램 폴더, `app/core/`, `app/common/`은 요청이 없으면 건드리지 않는다.
 - 공용 파일(`app/main.py`, `app/core/*`, `pyproject.toml`, `uv.lock`, `migrations/`)을 바꿔야 하면 바꾸기 전에 사용자에게 알린다.
 - 대규모 리포맷, 파일 이동, 이름 변경을 임의로 하지 않는다.
 - 패키지는 `uv add <패키지>`로만 추가하고, 추가한 이유를 사용자에게 알린다.
