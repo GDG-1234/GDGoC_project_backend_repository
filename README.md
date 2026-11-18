@@ -4,7 +4,7 @@ backend repository of team 1234
 ## 빠른 시작
 ```bash
 uv sync
-uv run fastapi dev main.py      # http://127.0.0.1:8000/docs
+uv run fastapi dev app/main.py      # http://127.0.0.1:8000/docs
 ```
 
 ## 문서
