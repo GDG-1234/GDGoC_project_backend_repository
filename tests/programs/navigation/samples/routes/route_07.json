@@ -1,0 +1,162 @@
+{
+  "request": {
+    "from": {
+      "placeId": 53
+    },
+    "to": {
+      "placeId": 32
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 53,
+        "name": "충무로 방향 입구"
+      },
+      "to": {
+        "id": 32,
+        "name": "원흥관 3층"
+      },
+      "totalSeconds": 122,
+      "totalKcal": 13.7,
+      "floorChanges": 0,
+      "usesRoad": false,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 624,
+            "x": 574.0,
+            "y": 2552.0
+          },
+          {
+            "nodeId": 463,
+            "x": 636.0,
+            "y": 2538.0
+          },
+          {
+            "nodeId": 383,
+            "x": 753.0,
+            "y": 2552.0
+          },
+          {
+            "nodeId": 1,
+            "x": 760.0,
+            "y": 2536.0
+          },
+          {
+            "nodeId": 541,
+            "x": 825.0,
+            "y": 2558.0
+          },
+          {
+            "nodeId": 3,
+            "x": 863.0,
+            "y": 2571.0
+          },
+          {
+            "nodeId": 539,
+            "x": 867.0,
+            "y": 2555.0
+          },
+          {
+            "nodeId": 533,
+            "x": 908.0,
+            "y": 2436.0
+          },
+          {
+            "nodeId": 511,
+            "x": 956.0,
+            "y": 2452.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "충무로 방향 입구에서 출발합니다",
+        "position": {
+          "x": 574.0,
+          "y": 2552.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 신공 3층 입구 앞까지 이동",
+        "position": {
+          "x": 574.0,
+          "y": 2552.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 41
+      },
+      {
+        "index": 2,
+        "action": "WALK",
+        "text": "108계단 아래까지 이동 (약 3초)",
+        "position": {
+          "x": 753.0,
+          "y": 2552.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 3
+      },
+      {
+        "index": 3,
+        "action": "STAIRS_UP",
+        "text": "계단을 올라가세요",
+        "position": {
+          "x": 760.0,
+          "y": 2536.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 43
+      },
+      {
+        "index": 4,
+        "action": "WALK",
+        "text": "원흥관 3층 후문까지 이동 (약 35초)",
+        "position": {
+          "x": 863.0,
+          "y": 2571.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 35
+      },
+      {
+        "index": 5,
+        "action": "ARRIVE",
+        "text": "도착: 원흥관 3층",
+        "position": {
+          "x": 956.0,
+          "y": 2452.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      }
+    ]
+  }
+}

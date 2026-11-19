@@ -1,0 +1,177 @@
+{
+  "request": {
+    "from": {
+      "placeId": 37
+    },
+    "to": {
+      "placeId": 41
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 37,
+        "name": "신공학관 1층"
+      },
+      "to": {
+        "id": 41,
+        "name": "신공학관 9층"
+      },
+      "totalSeconds": 113,
+      "totalKcal": 17.0,
+      "floorChanges": 4,
+      "usesRoad": false,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": true,
+        "buildingId": 11,
+        "floor": 3,
+        "floorImageUrl": "/static/floor/shingong_3.png",
+        "floorImageBounds": {
+          "x": 482,
+          "y": 2525,
+          "width": 436,
+          "height": 333
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 340,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 363,
+            "x": 859.0,
+            "y": 2674.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 11,
+        "floor": 4,
+        "floorImageUrl": "/static/floor/shingong_4.png",
+        "floorImageBounds": {
+          "x": 482,
+          "y": 2525,
+          "width": 436,
+          "height": 333
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 363,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 388,
+            "x": 859.0,
+            "y": 2674.0
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "indoor": true,
+        "buildingId": 11,
+        "floor": 7,
+        "floorImageUrl": "/static/floor/shingong_7.png",
+        "floorImageBounds": {
+          "x": 482,
+          "y": 2525,
+          "width": 436,
+          "height": 333
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 388,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 412,
+            "x": 859.0,
+            "y": 2674.0
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "indoor": true,
+        "buildingId": 11,
+        "floor": 9,
+        "floorImageUrl": "/static/floor/shingong_9.png",
+        "floorImageBounds": {
+          "x": 482,
+          "y": 2525,
+          "width": 436,
+          "height": 333
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 412,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 441,
+            "x": 859.0,
+            "y": 2674.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "신공학관 1층에서 출발합니다",
+        "position": {
+          "x": 859.0,
+          "y": 2674.0
+        },
+        "segmentIndex": 0,
+        "floor": 1,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "STAIRS_UP",
+        "text": "계단으로 신공학관 9층까지 올라가세요",
+        "position": {
+          "x": 859.0,
+          "y": 2674.0
+        },
+        "segmentIndex": 0,
+        "floor": 1,
+        "seconds": 113
+      },
+      {
+        "index": 2,
+        "action": "ARRIVE",
+        "text": "도착: 신공학관 9층",
+        "position": {
+          "x": 859.0,
+          "y": 2674.0
+        },
+        "segmentIndex": 3,
+        "floor": 9,
+        "seconds": null
+      }
+    ]
+  }
+}

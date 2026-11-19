@@ -1,0 +1,688 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "과학관",
+      "category": "BUILDING",
+      "buildingId": 1,
+      "buildingName": "과학관",
+      "floor": 0,
+      "position": {
+        "x": 1275.0,
+        "y": 3071.0
+      }
+    },
+    {
+      "id": 2,
+      "name": "다향관",
+      "category": "BUILDING",
+      "buildingId": 2,
+      "buildingName": "다향관",
+      "floor": 0,
+      "position": {
+        "x": 1469.5,
+        "y": 2464.0
+      }
+    },
+    {
+      "id": 3,
+      "name": "대운동장",
+      "category": "LANDMARK",
+      "buildingId": 3,
+      "buildingName": "대운동장",
+      "floor": 0,
+      "position": {
+        "x": 1575.0,
+        "y": 3437.0
+      }
+    },
+    {
+      "id": 4,
+      "name": "만해광장",
+      "category": "LANDMARK",
+      "buildingId": 4,
+      "buildingName": "만해광장",
+      "floor": 0,
+      "position": {
+        "x": 1121.5,
+        "y": 2074.5
+      }
+    },
+    {
+      "id": 5,
+      "name": "명진관",
+      "category": "BUILDING",
+      "buildingId": 5,
+      "buildingName": "명진관",
+      "floor": 0,
+      "position": {
+        "x": 1314.5,
+        "y": 2924.5
+      }
+    },
+    {
+      "id": 6,
+      "name": "문화관",
+      "category": "BUILDING",
+      "buildingId": 6,
+      "buildingName": "문화관",
+      "floor": 0,
+      "position": {
+        "x": 2421.0,
+        "y": 2837.0
+      }
+    },
+    {
+      "id": 7,
+      "name": "법학관·만해관",
+      "category": "BUILDING",
+      "buildingId": 7,
+      "buildingName": "법학관·만해관",
+      "floor": 0,
+      "position": {
+        "x": 1678.5,
+        "y": 2816.5
+      }
+    },
+    {
+      "id": 8,
+      "name": "본관",
+      "category": "BUILDING",
+      "buildingId": 8,
+      "buildingName": "본관",
+      "floor": 0,
+      "position": {
+        "x": 1145.5,
+        "y": 2539.0
+      }
+    },
+    {
+      "id": 9,
+      "name": "사회과학관·경영관",
+      "category": "BUILDING",
+      "buildingId": 9,
+      "buildingName": "사회과학관·경영관",
+      "floor": 0,
+      "position": {
+        "x": 2313.0,
+        "y": 3106.0
+      }
+    },
+    {
+      "id": 10,
+      "name": "상록원",
+      "category": "CAFETERIA",
+      "buildingId": 10,
+      "buildingName": "상록원",
+      "floor": 0,
+      "position": {
+        "x": 1178.5,
+        "y": 3209.0
+      }
+    },
+    {
+      "id": 11,
+      "name": "신공학관",
+      "category": "BUILDING",
+      "buildingId": 11,
+      "buildingName": "신공학관",
+      "floor": 0,
+      "position": {
+        "x": 703.0,
+        "y": 2696.0
+      }
+    },
+    {
+      "id": 12,
+      "name": "원흥관",
+      "category": "BUILDING",
+      "buildingId": 12,
+      "buildingName": "원흥관",
+      "floor": 0,
+      "position": {
+        "x": 866.5,
+        "y": 2340.0
+      }
+    },
+    {
+      "id": 13,
+      "name": "정각원",
+      "category": "BUILDING",
+      "buildingId": 13,
+      "buildingName": "정각원",
+      "floor": 0,
+      "position": {
+        "x": 1742.5,
+        "y": 3022.0
+      }
+    },
+    {
+      "id": 14,
+      "name": "정보문화관 P",
+      "category": "BUILDING",
+      "buildingId": 14,
+      "buildingName": "정보문화관 P",
+      "floor": 0,
+      "position": {
+        "x": 834.0,
+        "y": 2055.5
+      }
+    },
+    {
+      "id": 15,
+      "name": "정보문화관 Q",
+      "category": "BUILDING",
+      "buildingId": 15,
+      "buildingName": "정보문화관 Q",
+      "floor": 0,
+      "position": {
+        "x": 731.0,
+        "y": 1979.0
+      }
+    },
+    {
+      "id": 16,
+      "name": "중앙도서관",
+      "category": "LIBRARY",
+      "buildingId": 16,
+      "buildingName": "중앙도서관",
+      "floor": 0,
+      "position": {
+        "x": 1022.5,
+        "y": 2819.0
+      }
+    },
+    {
+      "id": 17,
+      "name": "체육관",
+      "category": "BUILDING",
+      "buildingId": 17,
+      "buildingName": "체육관",
+      "floor": 0,
+      "position": {
+        "x": 1424.0,
+        "y": 1961.0
+      }
+    },
+    {
+      "id": 18,
+      "name": "학림관",
+      "category": "BUILDING",
+      "buildingId": 18,
+      "buildingName": "학림관",
+      "floor": 0,
+      "position": {
+        "x": 1275.0,
+        "y": 1744.0
+      }
+    },
+    {
+      "id": 19,
+      "name": "학생회관",
+      "category": "BUILDING",
+      "buildingId": 19,
+      "buildingName": "학생회관",
+      "floor": 0,
+      "position": {
+        "x": 767.0,
+        "y": 1849.0
+      }
+    },
+    {
+      "id": 20,
+      "name": "학술관",
+      "category": "BUILDING",
+      "buildingId": 20,
+      "buildingName": "학술관",
+      "floor": 0,
+      "position": {
+        "x": 2600.5,
+        "y": 2738.0
+      }
+    },
+    {
+      "id": 21,
+      "name": "혜화관",
+      "category": "BUILDING",
+      "buildingId": 21,
+      "buildingName": "혜화관",
+      "floor": 0,
+      "position": {
+        "x": 1957.0,
+        "y": 2914.0
+      }
+    },
+    {
+      "id": 22,
+      "name": "정문",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 2380.0,
+        "y": 3389.0
+      }
+    },
+    {
+      "id": 23,
+      "name": "후문",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 1114.0,
+        "y": 1576.0
+      }
+    },
+    {
+      "id": 24,
+      "name": "혜화관 1층",
+      "category": "BUILDING",
+      "buildingId": 21,
+      "buildingName": "혜화관",
+      "floor": 1,
+      "position": {
+        "x": 1993.0,
+        "y": 2884.0
+      }
+    },
+    {
+      "id": 25,
+      "name": "혜화관 4층",
+      "category": "BUILDING",
+      "buildingId": 21,
+      "buildingName": "혜화관",
+      "floor": 4,
+      "position": {
+        "x": 1993.0,
+        "y": 2884.0
+      }
+    },
+    {
+      "id": 26,
+      "name": "정보문화관 P 2층",
+      "category": "BUILDING",
+      "buildingId": 14,
+      "buildingName": "정보문화관 P",
+      "floor": 2,
+      "position": {
+        "x": 857.0,
+        "y": 2058.0
+      }
+    },
+    {
+      "id": 27,
+      "name": "정보문화관 P 3층",
+      "category": "BUILDING",
+      "buildingId": 14,
+      "buildingName": "정보문화관 P",
+      "floor": 3,
+      "position": {
+        "x": 857.0,
+        "y": 2058.0
+      }
+    },
+    {
+      "id": 28,
+      "name": "학림관 B1층",
+      "category": "BUILDING",
+      "buildingId": 18,
+      "buildingName": "학림관",
+      "floor": -1,
+      "position": {
+        "x": 1265.0,
+        "y": 1758.0
+      }
+    },
+    {
+      "id": 29,
+      "name": "학림관 1층",
+      "category": "BUILDING",
+      "buildingId": 18,
+      "buildingName": "학림관",
+      "floor": 1,
+      "position": {
+        "x": 1265.0,
+        "y": 1758.0
+      }
+    },
+    {
+      "id": 30,
+      "name": "원흥관 1층",
+      "category": "BUILDING",
+      "buildingId": 12,
+      "buildingName": "원흥관",
+      "floor": 1,
+      "position": {
+        "x": 953.0,
+        "y": 2405.0
+      }
+    },
+    {
+      "id": 31,
+      "name": "원흥관 2층",
+      "category": "BUILDING",
+      "buildingId": 12,
+      "buildingName": "원흥관",
+      "floor": 2,
+      "position": {
+        "x": 953.0,
+        "y": 2405.0
+      }
+    },
+    {
+      "id": 32,
+      "name": "원흥관 3층",
+      "category": "BUILDING",
+      "buildingId": 12,
+      "buildingName": "원흥관",
+      "floor": 3,
+      "position": {
+        "x": 953.0,
+        "y": 2405.0
+      }
+    },
+    {
+      "id": 33,
+      "name": "원흥관 4층",
+      "category": "BUILDING",
+      "buildingId": 12,
+      "buildingName": "원흥관",
+      "floor": 4,
+      "position": {
+        "x": 953.0,
+        "y": 2405.0
+      }
+    },
+    {
+      "id": 34,
+      "name": "본관 1층",
+      "category": "BUILDING",
+      "buildingId": 8,
+      "buildingName": "본관",
+      "floor": 1,
+      "position": {
+        "x": 1149.0,
+        "y": 2551.0
+      }
+    },
+    {
+      "id": 35,
+      "name": "본관 2층",
+      "category": "BUILDING",
+      "buildingId": 8,
+      "buildingName": "본관",
+      "floor": 2,
+      "position": {
+        "x": 1149.0,
+        "y": 2551.0
+      }
+    },
+    {
+      "id": 36,
+      "name": "본관 3층",
+      "category": "BUILDING",
+      "buildingId": 8,
+      "buildingName": "본관",
+      "floor": 3,
+      "position": {
+        "x": 1149.0,
+        "y": 2551.0
+      }
+    },
+    {
+      "id": 37,
+      "name": "신공학관 1층",
+      "category": "BUILDING",
+      "buildingId": 11,
+      "buildingName": "신공학관",
+      "floor": 1,
+      "position": {
+        "x": 714.0,
+        "y": 2657.0
+      }
+    },
+    {
+      "id": 38,
+      "name": "신공학관 3층",
+      "category": "BUILDING",
+      "buildingId": 11,
+      "buildingName": "신공학관",
+      "floor": 3,
+      "position": {
+        "x": 714.0,
+        "y": 2657.0
+      }
+    },
+    {
+      "id": 39,
+      "name": "신공학관 4층",
+      "category": "BUILDING",
+      "buildingId": 11,
+      "buildingName": "신공학관",
+      "floor": 4,
+      "position": {
+        "x": 714.0,
+        "y": 2657.0
+      }
+    },
+    {
+      "id": 40,
+      "name": "신공학관 7층",
+      "category": "BUILDING",
+      "buildingId": 11,
+      "buildingName": "신공학관",
+      "floor": 7,
+      "position": {
+        "x": 714.0,
+        "y": 2657.0
+      }
+    },
+    {
+      "id": 41,
+      "name": "신공학관 9층",
+      "category": "BUILDING",
+      "buildingId": 11,
+      "buildingName": "신공학관",
+      "floor": 9,
+      "position": {
+        "x": 714.0,
+        "y": 2657.0
+      }
+    },
+    {
+      "id": 42,
+      "name": "사회과학관 2층",
+      "category": "BUILDING",
+      "buildingId": 9,
+      "buildingName": "사회과학관·경영관",
+      "floor": 2,
+      "position": {
+        "x": 2249.0,
+        "y": 2954.0
+      }
+    },
+    {
+      "id": 43,
+      "name": "사회과학관 3층",
+      "category": "BUILDING",
+      "buildingId": 9,
+      "buildingName": "사회과학관·경영관",
+      "floor": 3,
+      "position": {
+        "x": 2249.0,
+        "y": 2954.0
+      }
+    },
+    {
+      "id": 44,
+      "name": "경영관 2층",
+      "category": "BUILDING",
+      "buildingId": 9,
+      "buildingName": "사회과학관·경영관",
+      "floor": 2,
+      "position": {
+        "x": 2361.0,
+        "y": 3204.0
+      }
+    },
+    {
+      "id": 45,
+      "name": "경영관 3층",
+      "category": "BUILDING",
+      "buildingId": 9,
+      "buildingName": "사회과학관·경영관",
+      "floor": 3,
+      "position": {
+        "x": 2361.0,
+        "y": 3204.0
+      }
+    },
+    {
+      "id": 46,
+      "name": "문화관 B1층",
+      "category": "BUILDING",
+      "buildingId": 6,
+      "buildingName": "문화관",
+      "floor": -1,
+      "position": {
+        "x": 2422.0,
+        "y": 2841.0
+      }
+    },
+    {
+      "id": 47,
+      "name": "문화관 1층",
+      "category": "BUILDING",
+      "buildingId": 6,
+      "buildingName": "문화관",
+      "floor": 1,
+      "position": {
+        "x": 2422.0,
+        "y": 2841.0
+      }
+    },
+    {
+      "id": 48,
+      "name": "문화관 3층",
+      "category": "BUILDING",
+      "buildingId": 6,
+      "buildingName": "문화관",
+      "floor": 3,
+      "position": {
+        "x": 2422.0,
+        "y": 2841.0
+      }
+    },
+    {
+      "id": 49,
+      "name": "문화관 4층",
+      "category": "BUILDING",
+      "buildingId": 6,
+      "buildingName": "문화관",
+      "floor": 4,
+      "position": {
+        "x": 2422.0,
+        "y": 2841.0
+      }
+    },
+    {
+      "id": 50,
+      "name": "학술관 B1층",
+      "category": "BUILDING",
+      "buildingId": 20,
+      "buildingName": "학술관",
+      "floor": -1,
+      "position": {
+        "x": 2597.0,
+        "y": 2719.0
+      }
+    },
+    {
+      "id": 51,
+      "name": "학술관 1층",
+      "category": "BUILDING",
+      "buildingId": 20,
+      "buildingName": "학술관",
+      "floor": 1,
+      "position": {
+        "x": 2597.0,
+        "y": 2719.0
+      }
+    },
+    {
+      "id": 52,
+      "name": "학술관 4층",
+      "category": "BUILDING",
+      "buildingId": 20,
+      "buildingName": "학술관",
+      "floor": 4,
+      "position": {
+        "x": 2597.0,
+        "y": 2719.0
+      }
+    },
+    {
+      "id": 53,
+      "name": "충무로 방향 입구",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 574.0,
+        "y": 2552.0
+      }
+    },
+    {
+      "id": 54,
+      "name": "동대입구 방향 입구",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 2587.0,
+        "y": 2426.0
+      }
+    },
+    {
+      "id": 55,
+      "name": "DUICA쪽 입구",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 1625.0,
+        "y": 1936.0
+      }
+    },
+    {
+      "id": 56,
+      "name": "체육관쪽 입구",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 1459.0,
+        "y": 2166.0
+      }
+    },
+    {
+      "id": 57,
+      "name": "정보문화관 P쪽 입구",
+      "category": "ENTRANCE",
+      "buildingId": null,
+      "buildingName": null,
+      "floor": 0,
+      "position": {
+        "x": 691.0,
+        "y": 2095.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "from": {
+      "placeId": 1
+    },
+    "to": {
+      "placeId": 23
+    },
+    "options": {
+      "avoidStairs": true
+    }
+  },
+  "status": 422,
+  "response": {
+    "error": {
+      "code": "NO_ROUTE",
+      "message": "현재 옵션으로는 경로가 없습니다."
+    }
+  }
+}

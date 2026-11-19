@@ -1,0 +1,338 @@
+{
+  "request": {
+    "from": {
+      "placeId": 39
+    },
+    "to": {
+      "placeId": 3
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 39,
+        "name": "신공학관 4층"
+      },
+      "to": {
+        "id": 3,
+        "name": "대운동장"
+      },
+      "totalSeconds": 285,
+      "totalKcal": 25.7,
+      "floorChanges": 2,
+      "usesRoad": true,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": true,
+        "buildingId": 11,
+        "floor": 7,
+        "floorImageUrl": "/static/floor/shingong_7.png",
+        "floorImageBounds": {
+          "x": 482,
+          "y": 2525,
+          "width": 436,
+          "height": 333
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 388,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 412,
+            "x": 859.0,
+            "y": 2674.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 11,
+        "floor": 9,
+        "floorImageUrl": "/static/floor/shingong_9.png",
+        "floorImageBounds": {
+          "x": 482,
+          "y": 2525,
+          "width": 436,
+          "height": 333
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 412,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 441,
+            "x": 859.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 442,
+            "x": 864.0,
+            "y": 2675.0
+          },
+          {
+            "nodeId": 454,
+            "x": 873.0,
+            "y": 2649.0
+          },
+          {
+            "nodeId": 457,
+            "x": 885.0,
+            "y": 2617.0
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 457,
+            "x": 885.0,
+            "y": 2617.0
+          },
+          {
+            "nodeId": 456,
+            "x": 905.0,
+            "y": 2621.0
+          },
+          {
+            "nodeId": 458,
+            "x": 933.0,
+            "y": 2645.0
+          },
+          {
+            "nodeId": 464,
+            "x": 982.0,
+            "y": 2661.0
+          },
+          {
+            "nodeId": 465,
+            "x": 1067.0,
+            "y": 2687.0
+          },
+          {
+            "nodeId": 596,
+            "x": 1088.0,
+            "y": 2694.0
+          },
+          {
+            "nodeId": 597,
+            "x": 1139.0,
+            "y": 2712.0
+          },
+          {
+            "nodeId": 634,
+            "x": 1212.0,
+            "y": 2749.0
+          },
+          {
+            "nodeId": 184,
+            "x": 1351.0,
+            "y": 2792.0
+          },
+          {
+            "nodeId": 157,
+            "x": 1522.0,
+            "y": 2847.0
+          },
+          {
+            "nodeId": 60,
+            "x": 1544.0,
+            "y": 2893.0
+          },
+          {
+            "nodeId": 134,
+            "x": 1528.0,
+            "y": 3038.0
+          },
+          {
+            "nodeId": 135,
+            "x": 1519.0,
+            "y": 3117.0
+          },
+          {
+            "nodeId": 136,
+            "x": 1556.0,
+            "y": 3200.0
+          },
+          {
+            "nodeId": 110,
+            "x": 1509.0,
+            "y": 3208.0
+          },
+          {
+            "nodeId": 109,
+            "x": 1501.0,
+            "y": 3237.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "신공학관 4층에서 출발합니다",
+        "position": {
+          "x": 859.0,
+          "y": 2674.0
+        },
+        "segmentIndex": 0,
+        "floor": 4,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "STAIRS_UP",
+        "text": "계단으로 신공학관 9층까지 올라가세요",
+        "position": {
+          "x": 859.0,
+          "y": 2674.0
+        },
+        "segmentIndex": 0,
+        "floor": 4,
+        "seconds": 67
+      },
+      {
+        "index": 2,
+        "action": "WALK",
+        "text": "신공학관 9층까지 이동 (약 12초)",
+        "position": {
+          "x": 859.0,
+          "y": 2674.0
+        },
+        "segmentIndex": 1,
+        "floor": 9,
+        "seconds": 12
+      },
+      {
+        "index": 3,
+        "action": "EXIT_BUILDING",
+        "text": "신공학관 9층에서 밖으로 나가세요",
+        "position": {
+          "x": 885.0,
+          "y": 2617.0
+        },
+        "segmentIndex": 2,
+        "floor": 9,
+        "seconds": 4
+      },
+      {
+        "index": 4,
+        "action": "WALK",
+        "text": "중도 옆 계단 아래까지 이동 (약 36초)",
+        "position": {
+          "x": 905.0,
+          "y": 2621.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 36
+      },
+      {
+        "index": 5,
+        "action": "STAIRS_UP",
+        "text": "계단을 올라가세요",
+        "position": {
+          "x": 1088.0,
+          "y": 2694.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 14
+      },
+      {
+        "index": 6,
+        "action": "WALK",
+        "text": "명진관 오른쪽 계단 아래까지 이동 (약 82초)",
+        "position": {
+          "x": 1139.0,
+          "y": 2712.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 82
+      },
+      {
+        "index": 7,
+        "action": "DOWNHILL",
+        "text": "내리막길을 따라 만해관 내려가는 길1까지 이동",
+        "position": {
+          "x": 1544.0,
+          "y": 2893.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 26
+      },
+      {
+        "index": 8,
+        "action": "WALK",
+        "text": "만해관 내려가는 길2까지 이동 (약 14초)",
+        "position": {
+          "x": 1528.0,
+          "y": 3038.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 14
+      },
+      {
+        "index": 9,
+        "action": "DOWNHILL",
+        "text": "내리막길을 따라 만해관 내려가는 길3까지 이동",
+        "position": {
+          "x": 1519.0,
+          "y": 3117.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 16
+      },
+      {
+        "index": 10,
+        "action": "WALK",
+        "text": "대운동장 입구까지 이동 (약 14초)",
+        "position": {
+          "x": 1556.0,
+          "y": 3200.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 14
+      },
+      {
+        "index": 11,
+        "action": "ARRIVE",
+        "text": "도착: 대운동장",
+        "position": {
+          "x": 1501.0,
+          "y": 3237.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": null
+      }
+    ]
+  }
+}

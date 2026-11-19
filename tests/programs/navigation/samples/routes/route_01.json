@@ -1,0 +1,182 @@
+{
+  "request": {
+    "from": {
+      "placeId": 22
+    },
+    "to": {
+      "placeId": 16
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 22,
+        "name": "정문"
+      },
+      "to": {
+        "id": 16,
+        "name": "중앙도서관"
+      },
+      "totalSeconds": 345,
+      "totalKcal": 29.4,
+      "floorChanges": 0,
+      "usesRoad": true,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 579,
+            "x": 2380.0,
+            "y": 3389.0
+          },
+          {
+            "nodeId": 589,
+            "x": 2087.0,
+            "y": 3357.0
+          },
+          {
+            "nodeId": 590,
+            "x": 1694.0,
+            "y": 3241.0
+          },
+          {
+            "nodeId": 136,
+            "x": 1556.0,
+            "y": 3200.0
+          },
+          {
+            "nodeId": 135,
+            "x": 1519.0,
+            "y": 3117.0
+          },
+          {
+            "nodeId": 134,
+            "x": 1528.0,
+            "y": 3038.0
+          },
+          {
+            "nodeId": 60,
+            "x": 1544.0,
+            "y": 2893.0
+          },
+          {
+            "nodeId": 157,
+            "x": 1522.0,
+            "y": 2847.0
+          },
+          {
+            "nodeId": 184,
+            "x": 1351.0,
+            "y": 2792.0
+          },
+          {
+            "nodeId": 634,
+            "x": 1212.0,
+            "y": 2749.0
+          },
+          {
+            "nodeId": 597,
+            "x": 1139.0,
+            "y": 2712.0
+          },
+          {
+            "nodeId": 602,
+            "x": 1126.0,
+            "y": 2754.0
+          },
+          {
+            "nodeId": 601,
+            "x": 1116.0,
+            "y": 2752.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "정문에서 출발합니다",
+        "position": {
+          "x": 2380.0,
+          "y": 3389.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 만해관 내려가는 길2까지 이동",
+        "position": {
+          "x": 2380.0,
+          "y": 3389.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 204
+      },
+      {
+        "index": 2,
+        "action": "WALK",
+        "text": "만해관 내려가는 길1까지 이동 (약 14초)",
+        "position": {
+          "x": 1519.0,
+          "y": 3117.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 14
+      },
+      {
+        "index": 3,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 과학관 차도 입구까지 이동",
+        "position": {
+          "x": 1528.0,
+          "y": 3038.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 35
+      },
+      {
+        "index": 4,
+        "action": "WALK",
+        "text": "중도 정문까지 이동 (약 92초)",
+        "position": {
+          "x": 1544.0,
+          "y": 2893.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 92
+      },
+      {
+        "index": 5,
+        "action": "ARRIVE",
+        "text": "도착: 중앙도서관",
+        "position": {
+          "x": 1116.0,
+          "y": 2752.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      }
+    ]
+  }
+}
