@@ -35,7 +35,8 @@ class Settings(BaseSettings):
     @field_validator("database_url")
     @classmethod
     def use_async_driver(cls, value: str) -> str:
-        if not value.strip():
+        value = value.strip()  # 비밀값을 붙여 넣을 때 섞인 공백·줄바꿈 제거
+        if not value:
             return LOCAL_DATABASE_URL
         # Neon, Supabase가 주는 `postgresql://...?sslmode=require` 주소를 asyncpg용으로 바꾼다.
         if value.startswith(("postgresql://", "postgres://")):

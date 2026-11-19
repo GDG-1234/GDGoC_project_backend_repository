@@ -1,9 +1,10 @@
 name: Deploy
 
-# main에 머지되면 Cloud Run에 자동 배포한다.
+# main에 머지되면 Docker 이미지를 빌드해 Artifact Registry에 올리고 Cloud Run에 배포한다.
 # 설정 방법: docs/배포.md
-# DATABASE_URL은 Secret Manager에서, FIREBASE_PROJECT_ID는 GitHub 변수에서 넣는다.
-# ADMIN_EMAILS 등 나머지 환경변수는 Cloud Run 콘솔에서 설정하면 배포 후에도 유지된다.
+# - DATABASE_URL: Secret Manager에서 주입 (실행 계정 backend-runtime만 읽을 수 있음)
+# - FIREBASE_PROJECT_ID: GitHub 변수 GCP_PROJECT_ID
+# - ADMIN_EMAILS 등 나머지 환경변수는 Cloud Run 콘솔에서 설정하면 배포 후에도 유지된다.
 
 on:
   push:
@@ -23,6 +24,11 @@ jobs:
     # GitHub에 GCP_PROJECT_ID 변수를 등록하기 전에는 배포를 건너뛴다.
     if: vars.GCP_PROJECT_ID != ''
     runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      REGION: ${{ vars.GCP_REGION || 'asia-northeast3' }}
+      SERVICE: ${{ vars.CLOUD_RUN_SERVICE || 'backend' }}
+      REPOSITORY: ${{ vars.ARTIFACT_REPOSITORY || 'backend' }}
     steps:
       - uses: actions/checkout@v5
 
@@ -30,14 +36,27 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Docker 이미지 빌드, 업로드
+        run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${SERVICE}:${GITHUB_SHA}"
+          gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+
       - uses: google-github-actions/deploy-cloudrun@v2
         with:
-          project_id: ${{ vars.GCP_PROJECT_ID }}
-          region: ${{ vars.GCP_REGION || 'asia-northeast3' }}
-          service: ${{ vars.CLOUD_RUN_SERVICE || 'backend' }}
-          source: .
-          flags: --allow-unauthenticated
+          project_id: ${{ env.PROJECT_ID }}
+          region: ${{ env.REGION }}
+          service: ${{ env.SERVICE }}
+          image: ${{ env.IMAGE }}
+          flags: >-
+            --allow-unauthenticated
+            --service-account=backend-runtime@${{ env.PROJECT_ID }}.iam.gserviceaccount.com
+            --max-instances=2
           env_vars: |
-            FIREBASE_PROJECT_ID=${{ vars.GCP_PROJECT_ID }}
+            FIREBASE_PROJECT_ID=${{ env.PROJECT_ID }}
           secrets: |
             DATABASE_URL=DATABASE_URL:latest

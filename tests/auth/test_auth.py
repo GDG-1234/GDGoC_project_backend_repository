@@ -117,7 +117,7 @@ async def test_token_from_other_project_is_unauthorized(
 def test_settings_parse_comma_lists_and_db_url() -> None:
     settings = Settings(
         admin_emails="Admin@DGU.ac.kr, b@dgu.ac.kr",  # type: ignore[arg-type]
-        database_url="postgresql://u:p@host/db?sslmode=require&channel_binding=require",
+        database_url="  postgresql://u:p@host/db?sslmode=require&channel_binding=require\n",
     )
 
     assert settings.admin_emails == ["admin@dgu.ac.kr", "b@dgu.ac.kr"]
