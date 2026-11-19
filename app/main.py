@@ -24,4 +24,3 @@ app.include_router(navigation_router)
 
 # 지도·층 단면도·건물 사진. Firebase Hosting이 /api/**만 백엔드로 넘기므로 /api 아래에 둔다.
 app.mount("/api/static", StaticFiles(directory=NAVIGATION_STATIC_DIR), name="static")
-
