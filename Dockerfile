@@ -7,4 +7,4 @@ RUN uv sync --locked --no-dev --no-install-project
 COPY . .
 RUN uv sync --locked --no-dev
 ENV PATH="/app/.venv/bin:$PATH"
-CMD ["sh", "-c", "fastapi run app/main.py --port ${PORT:-8000}"]
+CMD ["sh", "-c", "alembic upgrade head && fastapi run app/main.py --port ${PORT:-8000}"]

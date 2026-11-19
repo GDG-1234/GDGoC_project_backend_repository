@@ -1,48 +1,70 @@
-from typing import Any
+import logging
 
 from fastapi import FastAPI, Request, status
-from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
-from starlette.responses import JSONResponse
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+logger = logging.getLogger(__name__)
 
 
-class AppError(Exception):
-    """앱 전체에서 쓰는 기본 예외"""
-    def __init__(
-        self, code: str, message: str, status_code: int = status.HTTP_400_BAD_REQUEST
-    ) -> None:
+class AppException(Exception):
+    """공용 예외. 응답은 `{"error": {"code", "message"}}` 형식이다 (API 명세서 1.5)."""
+
+    def __init__(self, status_code: int, code: str, message: str) -> None:
         super().__init__(message)
+        self.status_code = status_code
         self.code = code
         self.message = message
-        self.status_code = status_code
 
-class UnauthorizedError(AppError):
-    def __init__(self, message: str = "인증이 필요합니다.") -> None:
-        super().__init__("UNAUTHORIZED", message, status.HTTP_401_UNAUTHORIZED)
 
-class NotFoundError(AppError):
+class UnauthorizedException(AppException):
+    def __init__(self, message: str = "로그인이 필요합니다.") -> None:
+        super().__init__(status.HTTP_401_UNAUTHORIZED, "UNAUTHORIZED", message)
+
+
+class ForbiddenException(AppException):
+    def __init__(self, message: str = "권한이 없습니다.") -> None:
+        super().__init__(status.HTTP_403_FORBIDDEN, "FORBIDDEN", message)
+
+
+class NotFoundException(AppException):
     def __init__(self, code: str = "NOT_FOUND", message: str = "찾을 수 없습니다.") -> None:
-        super().__init__(code, message, status.HTTP_404_NOT_FOUND)
+        super().__init__(status.HTTP_404_NOT_FOUND, code, message)
 
-def error_body(code: str, message: str, details: Any = None) -> dict[str, Any]:
-    error: dict[str, Any] = {"code": code, "message": message}
-    if details is not None:
-        error["details"] = details
-    return {"error": error}
 
-async def app_error_handler(request: Request, exc: Exception) -> JSONResponse:
-    assert isinstance(exc, AppError)
-    return JSONResponse(status_code=exc.status_code, content=error_body(exc.code, exc.message))
+class EmailNotAllowedException(AppException):
+    def __init__(self, email: str) -> None:
+        super().__init__(
+            status.HTTP_403_FORBIDDEN,
+            "EMAIL_NOT_ALLOWED",
+            f"허용되지 않은 이메일 도메인입니다. ({email})",
+        )
 
-async def validation_error_handler(request: Request, exc: Exception) -> JSONResponse:
-    assert isinstance(exc, RequestValidationError)
+
+def error_response(status_code: int, code: str, message: str) -> JSONResponse:
     return JSONResponse(
-        status_code=422,
-        content=error_body(
-            "VALIDATION_ERROR", "요청 형식이 올바르지 않습니다.", jsonable_encoder(exc.errors())
-        ),
+        status_code=status_code, content={"error": {"code": code, "message": message}}
     )
 
+
 def register_exception_handlers(app: FastAPI) -> None:
-    app.add_exception_handler(AppError, app_error_handler)
-    app.add_exception_handler(RequestValidationError, validation_error_handler)
+    @app.exception_handler(AppException)
+    async def handle_app_exception(_: Request, exc: AppException) -> JSONResponse:
+        return error_response(exc.status_code, exc.code, exc.message)
+
+    @app.exception_handler(RequestValidationError)
+    async def handle_validation_error(_: Request, exc: RequestValidationError) -> JSONResponse:
+        return error_response(status.HTTP_400_BAD_REQUEST, "VALIDATION_ERROR", str(exc.errors()))
+
+    @app.exception_handler(StarletteHTTPException)
+    async def handle_http_exception(_: Request, exc: StarletteHTTPException) -> JSONResponse:
+        code = "NOT_FOUND" if exc.status_code == 404 else "HTTP_ERROR"
+        return error_response(exc.status_code, code, str(exc.detail))
+
+    @app.exception_handler(Exception)
+    async def handle_unexpected(_: Request, exc: Exception) -> JSONResponse:
+        logger.exception("처리하지 못한 오류", exc_info=exc)
+        return error_response(
+            status.HTTP_500_INTERNAL_SERVER_ERROR, "INTERNAL_ERROR", "서버 오류가 발생했습니다."
+        )
