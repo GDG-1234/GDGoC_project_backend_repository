@@ -14,7 +14,9 @@ PROGRAM_MODULES: list[str] = [
     # "app.programs.cafeteria.tools",
 ]
 
-TOOL_NAME_PATTERN = re.compile(r"^[a-z][a-z0-9_]*\.[a-z][a-z0-9_]*$")
+# <프로그램>_<기능>. OpenAI·Claude tool 이름 규칙(영문·숫자·_·-, 64자 이하) 안에 들어간다.
+TOOL_NAME_PATTERN = re.compile(r"^[a-z][a-z0-9]*(_[a-z0-9]+)+$")
+TOOL_NAME_MAX_LENGTH = 64
 
 ToolFunc = Callable[[Any], Awaitable[ToolResult]]
 F = TypeVar("F", bound=ToolFunc)
@@ -39,8 +41,8 @@ class ToolRegistry:
     def register(
         self, name: str, description: str, func: ToolFunc, timeout: float | None = None
     ) -> RegisteredTool:
-        if not TOOL_NAME_PATTERN.fullmatch(name):
-            raise ValueError(f"tool 이름은 '<프로그램>.<기능>' 형식이어야 합니다: {name}")
+        if len(name) > TOOL_NAME_MAX_LENGTH or not TOOL_NAME_PATTERN.fullmatch(name):
+            raise ValueError(f"tool 이름은 '<프로그램>_<기능>' 형식이어야 합니다: {name}")
         if name in self._tools:
             raise ValueError(f"이미 등록된 tool 이름입니다: {name}")
         if not inspect.iscoroutinefunction(func):

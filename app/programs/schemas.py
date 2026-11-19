@@ -1,6 +1,16 @@
-from typing import Any, Literal, Annotated
+from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, Field
+
+from app.common.schemas import CamelModel
+
+# ---- tool 함수가 반환하는 결과 ----
+
+
+class Candidate(CamelModel):
+    value: str
+    label: str
+    description: str | None = None
 
 
 class ToolOk(BaseModel):
@@ -9,63 +19,68 @@ class ToolOk(BaseModel):
     llm: dict[str, Any]
     ui: dict[str, Any] | None = None
 
-class Candidate(BaseModel):
-    value: str
-    label: str
-    description: str | None = None
 
 class ToolNeedClarification(BaseModel):
-    # 입력이 애매할 때, 후보만 주고, 되묻는 문장은 AI가 쓴다
+    """입력이 애매할 때. 후보만 주고, 되묻는 문장은 AI가 쓴다."""
 
     field: str
     message: str
     candidates: list[Candidate]
 
+
 ToolResult = ToolOk | ToolNeedClarification
 
-class ToolError(Exception):
-    # tool 안에서 예상된 실패를 알릴 때 던진다. 예: 메뉴 없음.
 
-    def __init__(self, code: str, message: str, details: list[dict[str, Any]] | None = None) -> None:
+class ToolError(Exception):
+    """tool 안에서 예상된 실패를 알릴 때 던진다. 예: 메뉴 없음."""
+
+    def __init__(
+        self, code: str, message: str, details: list[dict[str, Any]] | None = None
+    ) -> None:
         super().__init__(message)
         self.code = code
         self.message = message
         self.details = details
 
-# API 요청 응답
 
-class ToolInfo(BaseModel):
+# ---- API 요청/응답 (JSON은 camelCase) ----
+
+
+class ToolInfo(CamelModel):
     name: str
     description: str
     input_schema: dict[str, Any]
 
-class ToolListResponse(BaseModel):
-    tools: list[ToolInfo]
 
-class InvokeRequest(BaseModel):
+class InvokeRequest(CamelModel):
     arguments: dict[str, Any] = Field(default_factory=dict)
 
-class ErrorInfo(BaseModel):
+
+class ErrorInfo(CamelModel):
     code: str
     message: str
     details: list[dict[str, Any]] | None = None
 
-class InvokeOkResponse(BaseModel):
+
+class InvokeOkResponse(CamelModel):
     status: Literal["ok"] = "ok"
     llm: dict[str, Any]
     result_id: str | None
 
-class InvokeNeedClarificationResponse(BaseModel):
+
+class InvokeNeedClarificationResponse(CamelModel):
     status: Literal["need_clarification"] = "need_clarification"
     field: str
     message: str
     candidates: list[Candidate]
 
-class InvokeErrorResponse(BaseModel):
+
+class InvokeErrorResponse(CamelModel):
     status: Literal["error"] = "error"
     error: ErrorInfo
 
-InvokeNeedClarificationResponse = Annotated[
+
+InvokeResponse = Annotated[
     InvokeOkResponse | InvokeNeedClarificationResponse | InvokeErrorResponse,
     Field(discriminator="status"),
 ]
