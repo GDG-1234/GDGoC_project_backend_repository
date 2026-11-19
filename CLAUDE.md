@@ -8,6 +8,7 @@ AI 코딩 도구(Claude Code, Cursor, Copilot 등)가 이 저장소에서 작업
 - GDGoC 팀 1234 백엔드. 백엔드 개발자 2명이 함께 작업한다.
 - 스택: Python 3.12, FastAPI, Pydantic v2, SQLAlchemy 2.0(async), Alembic, PostgreSQL
 - 패키지 관리: `uv` (`pip install`을 직접 쓰지 않는다)
+- 인증: Firebase Authentication(Google 로그인). 백엔드는 비밀번호를 다루지 않고, 프론트가 보낸 ID 토큰만 검증한다 (`app/auth/`)
 
 ## 자주 쓰는 명령
 
