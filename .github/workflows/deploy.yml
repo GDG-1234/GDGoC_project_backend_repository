@@ -42,7 +42,7 @@ jobs:
         run: |
           IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${SERVICE}:${GITHUB_SHA}"
           gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
-          docker build -t "$IMAGE" .
+          docker build --provenance=false -t "$IMAGE" .
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
 

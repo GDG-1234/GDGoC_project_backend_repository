@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.auth.router import router as auth_router
+from app.chat.router import router as chat_router
 from app.common.exceptions import register_exception_handlers
 from app.core.config import get_settings
 from app.programs.navigation.repository import STATIC_DIR as NAVIGATION_STATIC_DIR
@@ -32,6 +33,7 @@ app.add_middleware(
 register_exception_handlers(app)
 
 app.include_router(auth_router)
+app.include_router(chat_router)
 app.include_router(navigation_router)
 app.include_router(skills_router)
 
