@@ -28,6 +28,11 @@ class ForbiddenException(AppException):
         super().__init__(status.HTTP_403_FORBIDDEN, "FORBIDDEN", message)
 
 
+class NotFoundException(AppException):
+    def __init__(self, code: str = "NOT_FOUND", message: str = "찾을 수 없습니다.") -> None:
+        super().__init__(status.HTTP_404_NOT_FOUND, code, message)
+
+
 class EmailNotAllowedException(AppException):
     def __init__(self, email: str) -> None:
         super().__init__(

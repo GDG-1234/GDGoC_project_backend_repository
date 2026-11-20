@@ -20,6 +20,12 @@ class Settings(BaseSettings):
     allowed_email_domains: CommaList = []
     cors_origins: CommaList = ["http://localhost:5173"]
 
+    # skill(프로그램) 공통 틀
+    service_api_key: str = ""
+    tool_timeout_seconds: float = 10
+    result_ttl_seconds: float = 1800
+    result_store_max_items: int = 1000
+
     @field_validator("admin_emails", "allowed_email_domains", "cors_origins", mode="before")
     @classmethod
     def split_comma(cls, value: object) -> object:
