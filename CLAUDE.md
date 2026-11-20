@@ -35,7 +35,12 @@ app/
 ├── auth/              # 로그인, 사용자
 ├── chat/              # 채팅 창구, 대화 기록, AI 서비스 호출
 └── programs/          # 채팅이 부르는 프로그램(skill)
+    ├── registry.py        # @tool 데코레이터, 프로그램 목록(PROGRAM_MODULES)
+    ├── schemas.py         # tool 결과(ToolOk 등), skills API 모델
+    ├── result_store.py    # 화면용 결과(ui) 보관
+    ├── service.py, router.py, dependencies.py   # /api/v1/skills
     └── <프로그램>/     # 예: navigation(길안내), cafeteria(학식)
+        ├── tools.py       # @tool 함수. LLM이 부르는 입구, service.py를 부른다
         ├── router.py      # 엔드포인트. 요청/응답 처리만 한다
         ├── schemas.py     # Pydantic 요청/응답 모델
         ├── models.py      # SQLAlchemy 모델
@@ -51,6 +56,7 @@ prototype/             # 길안내 검증용 구현. navigation 이전이 끝나
 - `auth/`, `chat/`도 프로그램 폴더와 같은 파일 구성(router, schemas, models, service, repository)을 따른다.
 - 한 프로그램 안의 기능은 쪼개지 않는다. 예: 건물 정보는 별도 프로그램이 아니라 `navigation/` 안에 둔다.
 - 다른 프로그램의 router, repository, models를 import하지 않는다. 필요하면 그 프로그램의 `service.py` 함수만 쓴다.
+- 새 프로그램은 `tools.py`에 `@tool` 함수를 만들고 `app/programs/registry.py`의 `PROGRAM_MODULES`에 한 줄 추가한다. tool 이름은 `<프로그램>_<기능>` (예: `cafeteria_get_menu`).
 
 ## 코드 규칙
 
