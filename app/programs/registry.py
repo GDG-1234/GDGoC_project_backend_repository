@@ -11,7 +11,8 @@ from app.programs.schemas import ToolResult
 
 # 프로그램의 tools.py를 여기에 한 줄씩 추가한다.
 PROGRAM_MODULES: list[str] = [
-    # "app.programs.cafeteria.tools",
+    "app.programs.cafeteria.tools",
+    "app.programs.notice.tools",
 ]
 
 # <프로그램>_<기능>. OpenAI·Claude tool 이름 규칙(영문·숫자·_·-, 64자 이하) 안에 들어간다.
