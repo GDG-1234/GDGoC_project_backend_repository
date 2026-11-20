@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     result_ttl_seconds: float = 1800
     result_store_max_items: int = 1000
 
+    # 채팅
+    daily_message_limit: int = 50  # 1인당 하루(한국 시간) 보낼 수 있는 메시지 수
+    chat_history_limit: int = 20  # AI에 넘길 최근 메시지 수 (새 메시지 포함)
+
     @field_validator("admin_emails", "allowed_email_domains", "cors_origins", mode="before")
     @classmethod
     def split_comma(cls, value: object) -> object:
