@@ -1,0 +1,400 @@
+{
+  "request": {
+    "from": {
+      "placeId": 23
+    },
+    "to": {
+      "placeId": 10
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 23,
+        "name": "후문"
+      },
+      "to": {
+        "id": 10,
+        "name": "상록원"
+      },
+      "totalSeconds": 396,
+      "totalKcal": 35.1,
+      "floorChanges": 0,
+      "usesRoad": true,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 748,
+            "x": 1114.0,
+            "y": 1576.0
+          },
+          {
+            "nodeId": 671,
+            "x": 1215.0,
+            "y": 1667.0
+          },
+          {
+            "nodeId": 670,
+            "x": 1282.0,
+            "y": 1705.0
+          },
+          {
+            "nodeId": 669,
+            "x": 1387.0,
+            "y": 1715.0
+          },
+          {
+            "nodeId": 673,
+            "x": 1368.0,
+            "y": 1772.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 18,
+        "floor": 1,
+        "floorImageUrl": "/static/floor/hakrim_1.png",
+        "floorImageBounds": {
+          "x": 1078,
+          "y": 1636,
+          "width": 394,
+          "height": 206
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 673,
+            "x": 1368.0,
+            "y": 1772.0
+          },
+          {
+            "nodeId": 679,
+            "x": 1365.0,
+            "y": 1780.0
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 679,
+            "x": 1365.0,
+            "y": 1780.0
+          },
+          {
+            "nodeId": 678,
+            "x": 1354.0,
+            "y": 1816.0
+          },
+          {
+            "nodeId": 121,
+            "x": 1344.0,
+            "y": 1841.0
+          },
+          {
+            "nodeId": 120,
+            "x": 1322.0,
+            "y": 1843.0
+          },
+          {
+            "nodeId": 614,
+            "x": 1317.0,
+            "y": 1873.0
+          },
+          {
+            "nodeId": 612,
+            "x": 1288.0,
+            "y": 1999.0
+          },
+          {
+            "nodeId": 718,
+            "x": 1282.0,
+            "y": 2029.0
+          },
+          {
+            "nodeId": 719,
+            "x": 1231.0,
+            "y": 2248.0
+          },
+          {
+            "nodeId": 642,
+            "x": 1258.0,
+            "y": 2245.0
+          },
+          {
+            "nodeId": 641,
+            "x": 1283.0,
+            "y": 2262.0
+          },
+          {
+            "nodeId": 87,
+            "x": 1321.0,
+            "y": 2354.0
+          },
+          {
+            "nodeId": 96,
+            "x": 1324.0,
+            "y": 2396.0
+          },
+          {
+            "nodeId": 626,
+            "x": 1320.0,
+            "y": 2423.0
+          },
+          {
+            "nodeId": 633,
+            "x": 1305.0,
+            "y": 2469.0
+          },
+          {
+            "nodeId": 283,
+            "x": 1300.0,
+            "y": 2478.0
+          },
+          {
+            "nodeId": 629,
+            "x": 1257.0,
+            "y": 2613.0
+          },
+          {
+            "nodeId": 289,
+            "x": 1250.0,
+            "y": 2635.0
+          },
+          {
+            "nodeId": 634,
+            "x": 1212.0,
+            "y": 2749.0
+          },
+          {
+            "nodeId": 635,
+            "x": 1188.0,
+            "y": 2742.0
+          },
+          {
+            "nodeId": 636,
+            "x": 1169.0,
+            "y": 2744.0
+          },
+          {
+            "nodeId": 324,
+            "x": 1113.0,
+            "y": 2930.0
+          },
+          {
+            "nodeId": 322,
+            "x": 1101.0,
+            "y": 2981.0
+          },
+          {
+            "nodeId": 327,
+            "x": 1102.0,
+            "y": 3089.0
+          },
+          {
+            "nodeId": 328,
+            "x": 1090.0,
+            "y": 3129.0
+          },
+          {
+            "nodeId": 330,
+            "x": 1117.0,
+            "y": 3139.0
+          },
+          {
+            "nodeId": 331,
+            "x": 1133.0,
+            "y": 3144.0
+          },
+          {
+            "nodeId": 335,
+            "x": 1127.0,
+            "y": 3151.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "후문에서 출발합니다",
+        "position": {
+          "x": 1114.0,
+          "y": 1576.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 학림관 뒷길5까지 이동",
+        "position": {
+          "x": 1114.0,
+          "y": 1576.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 30
+      },
+      {
+        "index": 2,
+        "action": "STAIRS_DOWN",
+        "text": "계단을 내려가세요",
+        "position": {
+          "x": 1215.0,
+          "y": 1667.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 13
+      },
+      {
+        "index": 3,
+        "action": "STAIRS_UP",
+        "text": "계단을 올라가세요",
+        "position": {
+          "x": 1282.0,
+          "y": 1705.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 10
+      },
+      {
+        "index": 4,
+        "action": "WALK",
+        "text": "학림관 오른쪽 뒷문까지 이동 (약 11초)",
+        "position": {
+          "x": 1387.0,
+          "y": 1715.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 11
+      },
+      {
+        "index": 5,
+        "action": "ENTER_BUILDING",
+        "text": "학림관 1층으로 들어가세요",
+        "position": {
+          "x": 1368.0,
+          "y": 1772.0
+        },
+        "segmentIndex": 1,
+        "floor": 0,
+        "seconds": 3
+      },
+      {
+        "index": 6,
+        "action": "EXIT_BUILDING",
+        "text": "학림관 1층에서 밖으로 나가세요",
+        "position": {
+          "x": 1365.0,
+          "y": 1780.0
+        },
+        "segmentIndex": 2,
+        "floor": 1,
+        "seconds": 7
+      },
+      {
+        "index": 7,
+        "action": "WALK",
+        "text": "듀이카 가는길1까지 이동 (약 9초)",
+        "position": {
+          "x": 1354.0,
+          "y": 1816.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 9
+      },
+      {
+        "index": 8,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 헐떡고개 위까지 이동",
+        "position": {
+          "x": 1322.0,
+          "y": 1843.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 159
+      },
+      {
+        "index": 9,
+        "action": "WALK",
+        "text": "팔정도 좌측 하단3까지 이동 (약 114초)",
+        "position": {
+          "x": 1320.0,
+          "y": 2423.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 114
+      },
+      {
+        "index": 10,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 상록원 가는 길2까지 이동",
+        "position": {
+          "x": 1101.0,
+          "y": 2981.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 24
+      },
+      {
+        "index": 11,
+        "action": "WALK",
+        "text": "상록원 정문까지 이동 (약 17초)",
+        "position": {
+          "x": 1102.0,
+          "y": 3089.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 17
+      },
+      {
+        "index": 12,
+        "action": "ARRIVE",
+        "text": "도착: 상록원",
+        "position": {
+          "x": 1127.0,
+          "y": 3151.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": null
+      }
+    ]
+  }
+}

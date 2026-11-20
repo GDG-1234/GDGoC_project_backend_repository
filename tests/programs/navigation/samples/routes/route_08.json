@@ -1,0 +1,203 @@
+{
+  "request": {
+    "from": {
+      "placeId": 54
+    },
+    "to": {
+      "placeId": 46
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 54,
+        "name": "동대입구 방향 입구"
+      },
+      "to": {
+        "id": 46,
+        "name": "문화관 B1층"
+      },
+      "totalSeconds": 91,
+      "totalKcal": 7.4,
+      "floorChanges": 0,
+      "usesRoad": true,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 111,
+            "x": 2587.0,
+            "y": 2426.0
+          },
+          {
+            "nodeId": 117,
+            "x": 2567.0,
+            "y": 2468.0
+          },
+          {
+            "nodeId": 113,
+            "x": 2517.0,
+            "y": 2537.0
+          },
+          {
+            "nodeId": 717,
+            "x": 2550.0,
+            "y": 2633.0
+          },
+          {
+            "nodeId": 10,
+            "x": 2539.0,
+            "y": 2684.0
+          },
+          {
+            "nodeId": 9,
+            "x": 2529.0,
+            "y": 2741.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 6,
+        "floor": -1,
+        "floorImageUrl": "/static/floor/culture_b1.png",
+        "floorImageBounds": {
+          "x": 2297,
+          "y": 2582,
+          "width": 254,
+          "height": 510
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 9,
+            "x": 2529.0,
+            "y": 2741.0
+          },
+          {
+            "nodeId": 6,
+            "x": 2519.0,
+            "y": 2803.0
+          },
+          {
+            "nodeId": 7,
+            "x": 2483.0,
+            "y": 2783.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "동대입구 방향 입구에서 출발합니다",
+        "position": {
+          "x": 2587.0,
+          "y": 2426.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "WALK",
+        "text": "동대입구 문화관1까지 이동 (약 24초)",
+        "position": {
+          "x": 2587.0,
+          "y": 2426.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 24
+      },
+      {
+        "index": 2,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 학술관 입구 앞까지 이동",
+        "position": {
+          "x": 2517.0,
+          "y": 2537.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 27
+      },
+      {
+        "index": 3,
+        "action": "WALK",
+        "text": "가든쿡 입구 앞까지 이동 (약 9초)",
+        "position": {
+          "x": 2550.0,
+          "y": 2633.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 9
+      },
+      {
+        "index": 4,
+        "action": "STAIRS_DOWN",
+        "text": "계단을 내려가세요",
+        "position": {
+          "x": 2539.0,
+          "y": 2684.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 12
+      },
+      {
+        "index": 5,
+        "action": "ENTER_BUILDING",
+        "text": "문화관 B1층으로 들어가세요",
+        "position": {
+          "x": 2529.0,
+          "y": 2741.0
+        },
+        "segmentIndex": 1,
+        "floor": 0,
+        "seconds": 11
+      },
+      {
+        "index": 6,
+        "action": "WALK",
+        "text": "가든쿡 문화관 입구까지 이동 (약 7초)",
+        "position": {
+          "x": 2519.0,
+          "y": 2803.0
+        },
+        "segmentIndex": 1,
+        "floor": -1,
+        "seconds": 7
+      },
+      {
+        "index": 7,
+        "action": "ARRIVE",
+        "text": "도착: 문화관 B1층",
+        "position": {
+          "x": 2483.0,
+          "y": 2783.0
+        },
+        "segmentIndex": 1,
+        "floor": -1,
+        "seconds": null
+      }
+    ]
+  }
+}

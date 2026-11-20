@@ -1,0 +1,293 @@
+{
+  "request": {
+    "from": {
+      "placeId": 52
+    },
+    "to": {
+      "placeId": 44
+    },
+    "options": {
+      "mode": "EASIEST"
+    }
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 52,
+        "name": "학술관 4층"
+      },
+      "to": {
+        "id": 44,
+        "name": "경영관 2층"
+      },
+      "totalSeconds": 105,
+      "totalKcal": 7.5,
+      "floorChanges": 2,
+      "usesRoad": false,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 712,
+            "x": 2550.0,
+            "y": 2761.0
+          },
+          {
+            "nodeId": 223,
+            "x": 2503.0,
+            "y": 2751.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 6,
+        "floor": 4,
+        "floorImageUrl": "/static/floor/culture_4.png",
+        "floorImageBounds": {
+          "x": 2297,
+          "y": 2582,
+          "width": 248,
+          "height": 510
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 223,
+            "x": 2503.0,
+            "y": 2751.0
+          },
+          {
+            "nodeId": 222,
+            "x": 2463.0,
+            "y": 2738.0
+          },
+          {
+            "nodeId": 203,
+            "x": 2436.0,
+            "y": 2817.0
+          },
+          {
+            "nodeId": 202,
+            "x": 2427.0,
+            "y": 2814.0
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "indoor": true,
+        "buildingId": 6,
+        "floor": 3,
+        "floorImageUrl": "/static/floor/culture_3.png",
+        "floorImageBounds": {
+          "x": 2297,
+          "y": 2582,
+          "width": 248,
+          "height": 510
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 202,
+            "x": 2427.0,
+            "y": 2814.0
+          },
+          {
+            "nodeId": 198,
+            "x": 2427.0,
+            "y": 2814.0
+          },
+          {
+            "nodeId": 199,
+            "x": 2436.0,
+            "y": 2817.0
+          },
+          {
+            "nodeId": 211,
+            "x": 2366.0,
+            "y": 3032.0
+          },
+          {
+            "nodeId": 212,
+            "x": 2354.0,
+            "y": 3065.0
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 212,
+            "x": 2354.0,
+            "y": 3065.0
+          },
+          {
+            "nodeId": 40,
+            "x": 2350.0,
+            "y": 3078.0
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "indoor": true,
+        "buildingId": 9,
+        "floor": 2,
+        "floorImageUrl": "/static/floor/social_business_2.png",
+        "floorImageBounds": {
+          "x": 2145,
+          "y": 2775,
+          "width": 297,
+          "height": 566
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 40,
+            "x": 2350.0,
+            "y": 3078.0
+          },
+          {
+            "nodeId": 39,
+            "x": 2338.0,
+            "y": 3115.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "학술관 4층에서 출발합니다",
+        "position": {
+          "x": 2550.0,
+          "y": 2761.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "WALK",
+        "text": "문화관 학술관 구름다리 입구까지 이동 (약 9초)",
+        "position": {
+          "x": 2550.0,
+          "y": 2761.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 9
+      },
+      {
+        "index": 2,
+        "action": "ENTER_BUILDING",
+        "text": "문화관 4층으로 들어가세요",
+        "position": {
+          "x": 2503.0,
+          "y": 2751.0
+        },
+        "segmentIndex": 1,
+        "floor": 0,
+        "seconds": 8
+      },
+      {
+        "index": 3,
+        "action": "WALK",
+        "text": "문화관 4층까지 이동 (약 17초)",
+        "position": {
+          "x": 2463.0,
+          "y": 2738.0
+        },
+        "segmentIndex": 1,
+        "floor": 4,
+        "seconds": 17
+      },
+      {
+        "index": 4,
+        "action": "STAIRS_DOWN",
+        "text": "계단으로 문화관 3층까지 내려가세요",
+        "position": {
+          "x": 2427.0,
+          "y": 2814.0
+        },
+        "segmentIndex": 2,
+        "floor": 4,
+        "seconds": 10
+      },
+      {
+        "index": 5,
+        "action": "WALK",
+        "text": "문화관 3층까지 이동 (약 49초)",
+        "position": {
+          "x": 2427.0,
+          "y": 2814.0
+        },
+        "segmentIndex": 2,
+        "floor": 3,
+        "seconds": 49
+      },
+      {
+        "index": 6,
+        "action": "EXIT_BUILDING",
+        "text": "문화관 3층에서 밖으로 나가세요",
+        "position": {
+          "x": 2354.0,
+          "y": 3065.0
+        },
+        "segmentIndex": 3,
+        "floor": 3,
+        "seconds": 7
+      },
+      {
+        "index": 7,
+        "action": "ENTER_BUILDING",
+        "text": "사회과학관·경영관 2층으로 들어가세요",
+        "position": {
+          "x": 2350.0,
+          "y": 3078.0
+        },
+        "segmentIndex": 4,
+        "floor": 0,
+        "seconds": 7
+      },
+      {
+        "index": 8,
+        "action": "ARRIVE",
+        "text": "도착: 경영관 2층",
+        "position": {
+          "x": 2338.0,
+          "y": 3115.0
+        },
+        "segmentIndex": 4,
+        "floor": 2,
+        "seconds": null
+      }
+    ]
+  }
+}

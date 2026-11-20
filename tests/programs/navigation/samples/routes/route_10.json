@@ -1,0 +1,281 @@
+{
+  "request": {
+    "from": {
+      "placeId": 27
+    },
+    "to": {
+      "placeId": 35
+    },
+    "options": {
+      "avoidRoad": true
+    }
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 27,
+        "name": "정보문화관 P 3층"
+      },
+      "to": {
+        "id": 35,
+        "name": "본관 2층"
+      },
+      "totalSeconds": 106,
+      "totalKcal": 12.6,
+      "floorChanges": 1,
+      "usesRoad": true,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 559,
+            "x": 833.0,
+            "y": 2174.0
+          },
+          {
+            "nodeId": 560,
+            "x": 832.0,
+            "y": 2188.0
+          },
+          {
+            "nodeId": 534,
+            "x": 880.0,
+            "y": 2180.0
+          },
+          {
+            "nodeId": 536,
+            "x": 943.0,
+            "y": 2161.0
+          },
+          {
+            "nodeId": 537,
+            "x": 1017.0,
+            "y": 2317.0
+          },
+          {
+            "nodeId": 535,
+            "x": 1037.0,
+            "y": 2319.0
+          },
+          {
+            "nodeId": 605,
+            "x": 1046.0,
+            "y": 2308.0
+          },
+          {
+            "nodeId": 606,
+            "x": 1078.0,
+            "y": 2382.0
+          },
+          {
+            "nodeId": 249,
+            "x": 1113.0,
+            "y": 2409.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 8,
+        "floor": 1,
+        "floorImageUrl": "/static/floor/main_hall_1.png",
+        "floorImageBounds": {
+          "x": 1017,
+          "y": 2394,
+          "width": 251,
+          "height": 324
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 249,
+            "x": 1113.0,
+            "y": 2409.0
+          },
+          {
+            "nodeId": 250,
+            "x": 1123.0,
+            "y": 2415.0
+          },
+          {
+            "nodeId": 243,
+            "x": 1120.0,
+            "y": 2431.0
+          },
+          {
+            "nodeId": 248,
+            "x": 1125.0,
+            "y": 2432.0
+          },
+          {
+            "nodeId": 247,
+            "x": 1128.0,
+            "y": 2422.0
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "indoor": true,
+        "buildingId": 8,
+        "floor": 2,
+        "floorImageUrl": "/static/floor/main_hall_2.png",
+        "floorImageBounds": {
+          "x": 1017,
+          "y": 2394,
+          "width": 251,
+          "height": 324
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 247,
+            "x": 1128.0,
+            "y": 2422.0
+          },
+          {
+            "nodeId": 267,
+            "x": 1128.0,
+            "y": 2422.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "정보문화관 P 3층에서 출발합니다",
+        "position": {
+          "x": 833.0,
+          "y": 2174.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "WALK",
+        "text": "원흥관 앞 계단 아래까지 이동 (약 11초)",
+        "position": {
+          "x": 833.0,
+          "y": 2174.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 11
+      },
+      {
+        "index": 2,
+        "action": "STAIRS_UP",
+        "text": "계단을 올라가세요",
+        "position": {
+          "x": 880.0,
+          "y": 2180.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 45
+      },
+      {
+        "index": 3,
+        "action": "WALK",
+        "text": "지하주차장 가는길1까지 이동 (약 3초)",
+        "position": {
+          "x": 1037.0,
+          "y": 2319.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 3
+      },
+      {
+        "index": 4,
+        "action": "UPHILL",
+        "text": "오르막길을 따라 지하주차장 가는길2까지 이동",
+        "position": {
+          "x": 1046.0,
+          "y": 2308.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 18
+      },
+      {
+        "index": 5,
+        "action": "WALK",
+        "text": "본관 1층 입구까지 이동 (약 8초)",
+        "position": {
+          "x": 1078.0,
+          "y": 2382.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 8
+      },
+      {
+        "index": 6,
+        "action": "ENTER_BUILDING",
+        "text": "본관 1층으로 들어가세요",
+        "position": {
+          "x": 1113.0,
+          "y": 2409.0
+        },
+        "segmentIndex": 1,
+        "floor": 0,
+        "seconds": 2
+      },
+      {
+        "index": 7,
+        "action": "WALK",
+        "text": "본관 1층까지 이동 (약 6초)",
+        "position": {
+          "x": 1123.0,
+          "y": 2415.0
+        },
+        "segmentIndex": 1,
+        "floor": 1,
+        "seconds": 6
+      },
+      {
+        "index": 8,
+        "action": "STAIRS_UP",
+        "text": "계단으로 본관 2층까지 올라가세요",
+        "position": {
+          "x": 1128.0,
+          "y": 2422.0
+        },
+        "segmentIndex": 2,
+        "floor": 1,
+        "seconds": 13
+      },
+      {
+        "index": 9,
+        "action": "ARRIVE",
+        "text": "도착: 본관 2층",
+        "position": {
+          "x": 1128.0,
+          "y": 2422.0
+        },
+        "segmentIndex": 2,
+        "floor": 2,
+        "seconds": null
+      }
+    ]
+  }
+}

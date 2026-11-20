@@ -1,0 +1,96 @@
+{
+  "request": {
+    "from": {
+      "placeId": 24
+    },
+    "to": {
+      "placeId": 25
+    },
+    "options": {}
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 24,
+        "name": "혜화관 1층"
+      },
+      "to": {
+        "id": 25,
+        "name": "혜화관 4층"
+      },
+      "totalSeconds": 27,
+      "totalKcal": 4.0,
+      "floorChanges": 1,
+      "usesRoad": false,
+      "usesShortcut": false,
+      "savedSeconds": null
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": true,
+        "buildingId": 21,
+        "floor": 4,
+        "floorImageUrl": "/static/floor/hyehwa_4.png",
+        "floorImageBounds": {
+          "x": 1804,
+          "y": 2694,
+          "width": 294,
+          "height": 437
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 722,
+            "x": 1981.0,
+            "y": 2922.0
+          },
+          {
+            "nodeId": 726,
+            "x": 1981.0,
+            "y": 2922.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "혜화관 1층에서 출발합니다",
+        "position": {
+          "x": 1981.0,
+          "y": 2922.0
+        },
+        "segmentIndex": 0,
+        "floor": 1,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "STAIRS_UP",
+        "text": "계단으로 혜화관 4층까지 올라가세요",
+        "position": {
+          "x": 1981.0,
+          "y": 2922.0
+        },
+        "segmentIndex": 0,
+        "floor": 1,
+        "seconds": 27
+      },
+      {
+        "index": 2,
+        "action": "ARRIVE",
+        "text": "도착: 혜화관 4층",
+        "position": {
+          "x": 1981.0,
+          "y": 2922.0
+        },
+        "segmentIndex": 0,
+        "floor": 4,
+        "seconds": null
+      }
+    ]
+  }
+}

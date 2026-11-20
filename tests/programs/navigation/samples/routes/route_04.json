@@ -1,0 +1,413 @@
+{
+  "request": {
+    "from": {
+      "placeId": 21
+    },
+    "to": {
+      "placeId": 38
+    },
+    "options": {
+      "compare": true
+    }
+  },
+  "response": {
+    "summary": {
+      "from": {
+        "id": 21,
+        "name": "혜화관"
+      },
+      "to": {
+        "id": 38,
+        "name": "신공학관 3층"
+      },
+      "totalSeconds": 266,
+      "totalKcal": 18.4,
+      "floorChanges": 0,
+      "usesRoad": true,
+      "usesShortcut": false,
+      "savedSeconds": 0
+    },
+    "segments": [
+      {
+        "index": 0,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 735,
+            "x": 1905.0,
+            "y": 2925.0
+          },
+          {
+            "nodeId": 737,
+            "x": 1805.0,
+            "y": 2902.0
+          },
+          {
+            "nodeId": 133,
+            "x": 1715.0,
+            "y": 2879.0
+          },
+          {
+            "nodeId": 131,
+            "x": 1701.0,
+            "y": 2874.0
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "indoor": true,
+        "buildingId": 7,
+        "floor": 1,
+        "floorImageUrl": "/static/floor/law_manhae_1.png",
+        "floorImageBounds": {
+          "x": 1528,
+          "y": 2563,
+          "width": 303,
+          "height": 506
+        },
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 131,
+            "x": 1701.0,
+            "y": 2874.0
+          },
+          {
+            "nodeId": 132,
+            "x": 1671.0,
+            "y": 2866.0
+          },
+          {
+            "nodeId": 142,
+            "x": 1626.0,
+            "y": 2852.0
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "indoor": false,
+        "buildingId": null,
+        "floor": 0,
+        "floorImageUrl": null,
+        "floorImageBounds": null,
+        "isShortcut": false,
+        "name": null,
+        "points": [
+          {
+            "nodeId": 142,
+            "x": 1626.0,
+            "y": 2852.0
+          },
+          {
+            "nodeId": 141,
+            "x": 1624.0,
+            "y": 2860.0
+          },
+          {
+            "nodeId": 60,
+            "x": 1544.0,
+            "y": 2893.0
+          },
+          {
+            "nodeId": 157,
+            "x": 1522.0,
+            "y": 2847.0
+          },
+          {
+            "nodeId": 184,
+            "x": 1351.0,
+            "y": 2792.0
+          },
+          {
+            "nodeId": 634,
+            "x": 1212.0,
+            "y": 2749.0
+          },
+          {
+            "nodeId": 597,
+            "x": 1139.0,
+            "y": 2712.0
+          },
+          {
+            "nodeId": 596,
+            "x": 1088.0,
+            "y": 2694.0
+          },
+          {
+            "nodeId": 465,
+            "x": 1067.0,
+            "y": 2687.0
+          },
+          {
+            "nodeId": 599,
+            "x": 1071.0,
+            "y": 2674.0
+          },
+          {
+            "nodeId": 600,
+            "x": 1058.0,
+            "y": 2670.0
+          },
+          {
+            "nodeId": 598,
+            "x": 1047.0,
+            "y": 2665.0
+          },
+          {
+            "nodeId": 608,
+            "x": 1002.0,
+            "y": 2615.0
+          },
+          {
+            "nodeId": 2,
+            "x": 975.0,
+            "y": 2592.0
+          },
+          {
+            "nodeId": 4,
+            "x": 947.0,
+            "y": 2600.0
+          },
+          {
+            "nodeId": 425,
+            "x": 898.0,
+            "y": 2584.0
+          },
+          {
+            "nodeId": 3,
+            "x": 863.0,
+            "y": 2571.0
+          },
+          {
+            "nodeId": 541,
+            "x": 825.0,
+            "y": 2558.0
+          },
+          {
+            "nodeId": 1,
+            "x": 760.0,
+            "y": 2536.0
+          },
+          {
+            "nodeId": 383,
+            "x": 753.0,
+            "y": 2552.0
+          },
+          {
+            "nodeId": 381,
+            "x": 742.0,
+            "y": 2576.0
+          },
+          {
+            "nodeId": 376,
+            "x": 739.0,
+            "y": 2583.0
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "index": 0,
+        "action": "START",
+        "text": "혜화관에서 출발합니다",
+        "position": {
+          "x": 1905.0,
+          "y": 2925.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": null
+      },
+      {
+        "index": 1,
+        "action": "WALK",
+        "text": "만해관 2층 입구 앞까지 이동 (약 35초)",
+        "position": {
+          "x": 1905.0,
+          "y": 2925.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 35
+      },
+      {
+        "index": 2,
+        "action": "STAIRS_UP",
+        "text": "계단을 올라가세요",
+        "position": {
+          "x": 1715.0,
+          "y": 2879.0
+        },
+        "segmentIndex": 0,
+        "floor": 0,
+        "seconds": 10
+      },
+      {
+        "index": 3,
+        "action": "ENTER_BUILDING",
+        "text": "법학관·만해관 1층으로 들어가세요",
+        "position": {
+          "x": 1701.0,
+          "y": 2874.0
+        },
+        "segmentIndex": 1,
+        "floor": 0,
+        "seconds": 6
+      },
+      {
+        "index": 4,
+        "action": "WALK",
+        "text": "법학관·만해관 1층까지 이동 (약 8초)",
+        "position": {
+          "x": 1671.0,
+          "y": 2866.0
+        },
+        "segmentIndex": 1,
+        "floor": 1,
+        "seconds": 8
+      },
+      {
+        "index": 5,
+        "action": "EXIT_BUILDING",
+        "text": "법학관·만해관 1층에서 밖으로 나가세요",
+        "position": {
+          "x": 1626.0,
+          "y": 2852.0
+        },
+        "segmentIndex": 2,
+        "floor": 1,
+        "seconds": 1
+      },
+      {
+        "index": 6,
+        "action": "WALK",
+        "text": "팔정도 좌측 하단까지 이동 (약 98초)",
+        "position": {
+          "x": 1624.0,
+          "y": 2860.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 98
+      },
+      {
+        "index": 7,
+        "action": "STAIRS_DOWN",
+        "text": "계단을 내려가세요",
+        "position": {
+          "x": 1139.0,
+          "y": 2712.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 10
+      },
+      {
+        "index": 8,
+        "action": "WALK",
+        "text": "중도 옆옆 계단 위까지 이동 (약 9초)",
+        "position": {
+          "x": 1088.0,
+          "y": 2694.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 9
+      },
+      {
+        "index": 9,
+        "action": "STAIRS_DOWN",
+        "text": "계단을 내려가세요",
+        "position": {
+          "x": 1058.0,
+          "y": 2670.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 4
+      },
+      {
+        "index": 10,
+        "action": "WALK",
+        "text": "지하주차장 앞까지 이동 (약 18초)",
+        "position": {
+          "x": 1047.0,
+          "y": 2665.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 18
+      },
+      {
+        "index": 11,
+        "action": "STAIRS_DOWN",
+        "text": "계단을 내려가세요",
+        "position": {
+          "x": 975.0,
+          "y": 2592.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 10
+      },
+      {
+        "index": 12,
+        "action": "WALK",
+        "text": "108계단 중간1까지 이동 (약 16초)",
+        "position": {
+          "x": 947.0,
+          "y": 2600.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 16
+      },
+      {
+        "index": 13,
+        "action": "STAIRS_DOWN",
+        "text": "계단을 내려가세요",
+        "position": {
+          "x": 863.0,
+          "y": 2571.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 31
+      },
+      {
+        "index": 14,
+        "action": "WALK",
+        "text": "신공 3층 입구까지 이동 (약 9초)",
+        "position": {
+          "x": 760.0,
+          "y": 2536.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": 9
+      },
+      {
+        "index": 15,
+        "action": "ARRIVE",
+        "text": "도착: 신공학관 3층",
+        "position": {
+          "x": 739.0,
+          "y": 2583.0
+        },
+        "segmentIndex": 2,
+        "floor": 0,
+        "seconds": null
+      }
+    ]
+  }
+}

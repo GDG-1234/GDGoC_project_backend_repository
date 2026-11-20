@@ -1,0 +1,238 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "과학관",
+      "aliases": [],
+      "position": {
+        "x": 1275.0,
+        "y": 3071.0
+      },
+      "thumbnailUrl": "/static/building/science.png"
+    },
+    {
+      "id": 2,
+      "name": "다향관",
+      "aliases": [],
+      "position": {
+        "x": 1469.5,
+        "y": 2464.0
+      },
+      "thumbnailUrl": "/static/building/dahyang.png"
+    },
+    {
+      "id": 3,
+      "name": "대운동장",
+      "aliases": [],
+      "position": {
+        "x": 1575.0,
+        "y": 3437.0
+      },
+      "thumbnailUrl": "/static/building/stadium.png"
+    },
+    {
+      "id": 4,
+      "name": "만해광장",
+      "aliases": [],
+      "position": {
+        "x": 1121.5,
+        "y": 2074.5
+      },
+      "thumbnailUrl": "/static/building/manhae_plaza.png"
+    },
+    {
+      "id": 5,
+      "name": "명진관",
+      "aliases": [],
+      "position": {
+        "x": 1314.5,
+        "y": 2924.5
+      },
+      "thumbnailUrl": "/static/building/myungjin.png"
+    },
+    {
+      "id": 6,
+      "name": "문화관",
+      "aliases": [],
+      "position": {
+        "x": 2421.0,
+        "y": 2837.0
+      },
+      "thumbnailUrl": "/static/building/culture.png"
+    },
+    {
+      "id": 7,
+      "name": "법학관·만해관",
+      "aliases": [
+        "법학관",
+        "만해관"
+      ],
+      "position": {
+        "x": 1678.5,
+        "y": 2816.5
+      },
+      "thumbnailUrl": "/static/building/law_manhae.png"
+    },
+    {
+      "id": 8,
+      "name": "본관",
+      "aliases": [],
+      "position": {
+        "x": 1145.5,
+        "y": 2539.0
+      },
+      "thumbnailUrl": "/static/building/main_hall.png"
+    },
+    {
+      "id": 9,
+      "name": "사회과학관·경영관",
+      "aliases": [
+        "사회과학관",
+        "경영관",
+        "사과관"
+      ],
+      "position": {
+        "x": 2313.0,
+        "y": 3106.0
+      },
+      "thumbnailUrl": "/static/building/social_business.png"
+    },
+    {
+      "id": 10,
+      "name": "상록원",
+      "aliases": [
+        "학식",
+        "식당"
+      ],
+      "position": {
+        "x": 1178.5,
+        "y": 3209.0
+      },
+      "thumbnailUrl": "/static/building/sangnok.png"
+    },
+    {
+      "id": 11,
+      "name": "신공학관",
+      "aliases": [
+        "신공"
+      ],
+      "position": {
+        "x": 703.0,
+        "y": 2696.0
+      },
+      "thumbnailUrl": "/static/building/shingong.png"
+    },
+    {
+      "id": 12,
+      "name": "원흥관",
+      "aliases": [],
+      "position": {
+        "x": 866.5,
+        "y": 2340.0
+      },
+      "thumbnailUrl": "/static/building/wonheung.png"
+    },
+    {
+      "id": 13,
+      "name": "정각원",
+      "aliases": [],
+      "position": {
+        "x": 1742.5,
+        "y": 3022.0
+      },
+      "thumbnailUrl": "/static/building/jeonggak.png"
+    },
+    {
+      "id": 14,
+      "name": "정보문화관 P",
+      "aliases": [
+        "정보문화관",
+        "정문관",
+        "P동"
+      ],
+      "position": {
+        "x": 834.0,
+        "y": 2055.5
+      },
+      "thumbnailUrl": "/static/building/jeongbo_p.png"
+    },
+    {
+      "id": 15,
+      "name": "정보문화관 Q",
+      "aliases": [
+        "정보문화관",
+        "Q동"
+      ],
+      "position": {
+        "x": 731.0,
+        "y": 1979.0
+      },
+      "thumbnailUrl": "/static/building/jeongbo_q.png"
+    },
+    {
+      "id": 16,
+      "name": "중앙도서관",
+      "aliases": [
+        "중도",
+        "도서관"
+      ],
+      "position": {
+        "x": 1022.5,
+        "y": 2819.0
+      },
+      "thumbnailUrl": "/static/building/library.png"
+    },
+    {
+      "id": 17,
+      "name": "체육관",
+      "aliases": [],
+      "position": {
+        "x": 1424.0,
+        "y": 1961.0
+      },
+      "thumbnailUrl": "/static/building/gym.png"
+    },
+    {
+      "id": 18,
+      "name": "학림관",
+      "aliases": [],
+      "position": {
+        "x": 1275.0,
+        "y": 1744.0
+      },
+      "thumbnailUrl": "/static/building/hakrim.png"
+    },
+    {
+      "id": 19,
+      "name": "학생회관",
+      "aliases": [
+        "학관"
+      ],
+      "position": {
+        "x": 767.0,
+        "y": 1849.0
+      },
+      "thumbnailUrl": "/static/building/student_union.png"
+    },
+    {
+      "id": 20,
+      "name": "학술관",
+      "aliases": [],
+      "position": {
+        "x": 2600.5,
+        "y": 2738.0
+      },
+      "thumbnailUrl": "/static/building/haksul.png"
+    },
+    {
+      "id": 21,
+      "name": "혜화관",
+      "aliases": [],
+      "position": {
+        "x": 1957.0,
+        "y": 2914.0
+      },
+      "thumbnailUrl": "/static/building/hyehwa.png"
+    }
+  ]
+}
