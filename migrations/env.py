@@ -10,6 +10,7 @@ from app.auth import models as auth_models  # noqa: F401  테이블 등록용
 from app.chat import models as chat_models  # noqa: F401  테이블 등록용
 from app.core.config import get_settings
 from app.core.database import Base
+from app.timetable import models as timetable_models  # noqa: F401  테이블 등록용
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

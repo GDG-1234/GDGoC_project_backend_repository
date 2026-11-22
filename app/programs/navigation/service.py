@@ -1,6 +1,7 @@
 """길안내 로직. 엔진을 부르고, 에러와 이미지 URL을 우리 API 형식으로 바꾼다.
 
-API(router.py)와 AI tool(tools.py)이 함께 쓴다. tool용 함수는 맨 아래에 있다.
+API(router.py)와 AI tool(tools.py)이 함께 쓴다. tool용 함수는 아래쪽에,
+다른 기능(시간표 등)이 쓰는 함수는 맨 아래에 있다.
 """
 
 from collections.abc import Callable
@@ -8,6 +9,7 @@ from typing import Any
 
 from app.common.exceptions import AppException
 from app.common.schemas import ItemsResponse
+from app.programs.navigation import repository
 from app.programs.navigation.engine import ApiError, Engine
 from app.programs.navigation.schemas import (
     BuildingDetailResponse,
@@ -18,6 +20,8 @@ from app.programs.navigation.schemas import (
     NearestPlaceResponse,
     PlaceCategory,
     PlaceSummary,
+    RoomLocation,
+    RouteMode,
     RouteRequest,
     RouteResponse,
     SearchPlaceInput,
@@ -254,3 +258,73 @@ def get_building_tool(engine: Engine, args: GetBuildingInput) -> ToolOk | ToolNe
         "note": "floorsWithGuide는 길안내 데이터가 있는 층이다. 건물의 실제 층수와 다를 수 있다.",
     }
     return ToolOk(llm=llm, ui=detail.model_dump(mode="json", by_alias=True))
+
+
+# ---- 다른 기능이 쓰는 함수 ----
+
+
+def _exact_place(engine: Engine, name: str, building_id: int) -> PlaceSummary | None:
+    places = search_places(engine, name, None, building_id, 30).items
+    return next((p for p in places if p.name == name), None)
+
+
+def locate_room(building_name: str | None, floor: int | None) -> RoomLocation | None:
+    """건물 이름과 층을 길안내 장소로 바꾼다. 건물을 못 찾으면 None.
+
+    그 층의 장소가 있으면 층까지(FLOOR), 없으면 건물까지(BUILDING) 안내한다.
+    강의실 단위 데이터는 아직 없다.
+    """
+    if not building_name:
+        return None
+    engine = repository.get_engine()
+    try:
+        building = resolve_building(engine, building_name)
+    except ToolError:
+        return None
+    if isinstance(building, ToolNeedClarification):
+        return None
+
+    if floor:
+        floor_place = _exact_place(engine, f"{building.name} {floor_label(floor)}", building.id)
+        if floor_place is not None:
+            return RoomLocation(
+                building_id=building.id,
+                building_name=building.name,
+                floor=floor,
+                place_id=floor_place.id,
+                place_name=floor_place.name,
+                precision="FLOOR",
+            )
+    building_place = _exact_place(engine, building.name, building.id)
+    return RoomLocation(
+        building_id=building.id,
+        building_name=building.name,
+        floor=floor,
+        place_id=building_place.id if building_place else None,
+        place_name=building_place.name if building_place else None,
+        precision="BUILDING",
+    )
+
+
+def get_place(place_id: int) -> PlaceSummary | None:
+    place = repository.get_engine().places.get(place_id)
+    return PlaceSummary.model_validate(place) if place is not None else None
+
+
+def route_between(
+    from_place_id: int,
+    to_place_id: int,
+    *,
+    mode: RouteMode = "FASTEST",
+    avoid_road: bool = False,
+    avoid_stairs: bool = False,
+) -> RouteResponse:
+    """장소 id 두 개 사이의 경로. 실패하면 AppException(NO_ROUTE, SAME_PLACE 등)."""
+    request = RouteRequest.model_validate(
+        {
+            "from": {"placeId": from_place_id},
+            "to": {"placeId": to_place_id},
+            "options": {"mode": mode, "avoidRoad": avoid_road, "avoidStairs": avoid_stairs},
+        }
+    )
+    return find_route(repository.get_engine(), request)

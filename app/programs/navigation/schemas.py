@@ -175,6 +175,20 @@ class BuildingDetailResponse(CamelModel):
     facilities: list[Facility]
 
 
+class RoomLocation(CamelModel):
+    """강의실(건물 이름 + 층)을 길안내 장소로 바꾼 결과. 시간표 같은 다른 기능이 쓴다.
+
+    precision: FLOOR=그 층까지 안내 가능, BUILDING=건물까지만 안내 가능(그 층 데이터 없음)
+    """
+
+    building_id: int
+    building_name: str
+    floor: int | None
+    place_id: int | None
+    place_name: str | None
+    precision: Literal["FLOOR", "BUILDING"]
+
+
 # ---- AI tool 입력 (LLM이 보는 JSON Schema라 BaseModel을 쓴다) ----
 
 PLACE_EXAMPLES = "예: 정문, 중도, 신공학관 4층, 혜화관 1층, 학식"
