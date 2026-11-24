@@ -13,6 +13,7 @@ from app.programs.navigation.repository import STATIC_DIR as NAVIGATION_STATIC_D
 from app.programs.navigation.router import router as navigation_router
 from app.programs.registry import load_programs
 from app.programs.router import router as skills_router
+from app.timetable.router import router as timetable_router
 
 
 @asynccontextmanager
@@ -36,6 +37,7 @@ app.include_router(auth_router)
 app.include_router(chat_router)
 app.include_router(navigation_router)
 app.include_router(skills_router)
+app.include_router(timetable_router)
 
 # 지도·층 단면도·건물 사진. Firebase Hosting이 /api/**만 백엔드로 넘기므로 /api 아래에 둔다.
 app.mount("/api/static", StaticFiles(directory=NAVIGATION_STATIC_DIR), name="static")
