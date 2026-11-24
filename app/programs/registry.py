@@ -13,6 +13,7 @@ from app.programs.schemas import ToolResult
 PROGRAM_MODULES: list[str] = [
     "app.programs.cafeteria.tools",
     "app.programs.notice.tools",
+    "app.programs.navigation.tools",
 ]
 
 # <프로그램>_<기능>. OpenAI·Claude tool 이름 규칙(영문·숫자·_·-, 64자 이하) 안에 들어간다.
