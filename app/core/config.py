@@ -30,6 +30,11 @@ class Settings(BaseSettings):
     daily_message_limit: int = 50  # 1인당 하루(한국 시간) 보낼 수 있는 메시지 수
     chat_history_limit: int = 20  # AI에 넘길 최근 메시지 수 (새 메시지 포함)
 
+    # AI 서비스 (비워 두면 임시 답변을 쓴다)
+    ai_service_url: str = ""  # 예: https://agent.example.com → POST {url}/agent/respond
+    ai_service_key: str = ""  # 백엔드 → AI 서비스 호출에 붙이는 X-Service-Key
+    ai_timeout_seconds: float = 30
+
     @field_validator("admin_emails", "allowed_email_domains", "cors_origins", mode="before")
     @classmethod
     def split_comma(cls, value: object) -> object:
