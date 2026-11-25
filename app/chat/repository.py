@@ -1,11 +1,13 @@
 from collections.abc import Sequence
-from datetime import datetime
+from datetime import date
 
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, select, update
+from sqlalchemy.dialects.postgresql import insert as postgresql_insert
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.chat.models import Conversation, Message
+from app.chat.models import Conversation, DailyUsage, Message
 
 
 async def create_conversation(session: AsyncSession, user_id: int, title: str) -> Conversation:
@@ -57,13 +59,55 @@ async def recent_messages(session: AsyncSession, conversation_id: int, limit: in
     return list(reversed(result.scalars().all()))
 
 
-async def count_user_messages_since(session: AsyncSession, user_id: int, since: datetime) -> int:
-    result = await session.execute(
-        select(func.count())
-        .select_from(Message)
-        .where(Message.user_id == user_id, Message.role == "user", Message.created_at >= since)
+def _upsert(session: AsyncSession):  # noqa: ANN202  dialect별 insert 함수
+    """ON CONFLICT를 쓰는 insert. 운영은 PostgreSQL, 테스트·로컬은 SQLite다."""
+    if session.get_bind().dialect.name == "postgresql":
+        return postgresql_insert
+    return sqlite_insert
+
+
+async def reserve_daily_message(
+    session: AsyncSession, user_id: int, day: date, limit: int
+) -> int | None:
+    """오늘 사용량을 1 올리고 올린 뒤의 값을 돌려준다. 이미 한도면 올리지 않고 None.
+
+    "없으면 1로 넣고, 있으면 한도 미만일 때만 +1"을 SQL 한 번으로 해서,
+    동시에 들어온 요청이 같은 남은 한도를 함께 쓰지 못하게 한다.
+    """
+    if limit <= 0:
+        return None
+    insert = _upsert(session)
+    stmt = (
+        insert(DailyUsage)
+        .values(user_id=user_id, day=day, count=1)
+        .on_conflict_do_update(
+            index_elements=[DailyUsage.user_id, DailyUsage.day],
+            set_={"count": DailyUsage.count + 1},
+            where=DailyUsage.count < limit,
+        )
+        .returning(DailyUsage.count)
     )
-    return result.scalar_one()
+    result = await session.execute(stmt)
+    row = result.first()
+    await session.commit()
+    return row[0] if row else None
+
+
+async def release_daily_message(session: AsyncSession, user_id: int, day: date) -> None:
+    """예약한 사용량 1을 되돌린다 (AI 호출이 실패했을 때)."""
+    await session.execute(
+        update(DailyUsage)
+        .where(DailyUsage.user_id == user_id, DailyUsage.day == day, DailyUsage.count > 0)
+        .values(count=DailyUsage.count - 1)
+    )
+    await session.commit()
+
+
+async def get_daily_count(session: AsyncSession, user_id: int, day: date) -> int:
+    result = await session.execute(
+        select(DailyUsage.count).where(DailyUsage.user_id == user_id, DailyUsage.day == day)
+    )
+    return result.scalar_one_or_none() or 0
 
 
 async def add_messages(

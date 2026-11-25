@@ -1,6 +1,11 @@
-import pytest
+from collections.abc import AsyncIterator
+from datetime import UTC, datetime, timedelta
 
-from app.programs.result_store import MemoryResultStore
+import pytest
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+
+from app.core.database import Base
+from app.programs.result_store import DbResultStore, MemoryResultStore
 
 
 class FakeClock:
@@ -72,3 +77,68 @@ async def test_expired_results_are_cleaned_on_put() -> None:
 
     assert await store.get(fresh) is not None
     assert await store.get(newer) is not None
+
+
+# ---- DB 보관 (운영 기본값) ----
+
+
+class FakeUtcClock:
+    def __init__(self) -> None:
+        self.now = datetime(2026, 11, 25, 12, 0, tzinfo=UTC)
+
+    def __call__(self) -> datetime:
+        return self.now
+
+
+@pytest.fixture
+async def session() -> AsyncIterator[AsyncSession]:
+    engine = create_async_engine("sqlite+aiosqlite://")
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    async with async_sessionmaker(engine, expire_on_commit=False)() as s:
+        yield s
+    await engine.dispose()
+
+
+@pytest.mark.anyio
+async def test_db_store_put_then_get(session: AsyncSession) -> None:
+    store = DbResultStore(session, ttl_seconds=60, clock=FakeUtcClock())
+
+    result_id = await store.put("navigation_find_route", {"route": {"steps": []}})
+    stored = await store.get(result_id)
+
+    assert result_id.startswith("r_")
+    assert stored is not None
+    assert (stored.tool_name, stored.ui) == ("navigation_find_route", {"route": {"steps": []}})
+
+
+@pytest.mark.anyio
+async def test_db_store_is_shared_between_store_objects(session: AsyncSession) -> None:
+    # 인스턴스가 달라도(여기서는 store 객체가 달라도) 같은 DB면 찾는다
+    clock = FakeUtcClock()
+    result_id = await DbResultStore(session, ttl_seconds=60, clock=clock).put("t_a", {"a": 1})
+
+    stored = await DbResultStore(session, ttl_seconds=60, clock=clock).get(result_id)
+
+    assert stored is not None and stored.ui == {"a": 1}
+
+
+@pytest.mark.anyio
+async def test_db_store_expires_and_cleans_up(session: AsyncSession) -> None:
+    clock = FakeUtcClock()
+    store = DbResultStore(session, ttl_seconds=60, clock=clock)
+    old_id = await store.put("t_a", {"a": 1})
+
+    clock.now += timedelta(seconds=61)
+    assert await store.get(old_id) is None
+
+    await store.put("t_b", {"b": 1})  # 넣을 때 만료된 결과를 지운다
+    clock.now -= timedelta(seconds=61)  # 시간을 되돌려도 이미 지워져 있다
+    assert await store.get(old_id) is None
+
+
+@pytest.mark.anyio
+async def test_db_store_unknown_id(session: AsyncSession) -> None:
+    store = DbResultStore(session, ttl_seconds=60, clock=FakeUtcClock())
+
+    assert await store.get("r_없음") is None

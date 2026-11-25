@@ -1,7 +1,7 @@
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any
 
-from sqlalchemy import JSON, DateTime, ForeignKey, Index, String, Text
+from sqlalchemy import JSON, Date, DateTime, ForeignKey, Index, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -48,3 +48,19 @@ class Message(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
 
     conversation: Mapped[Conversation] = relationship(back_populates="messages")
+
+
+class DailyUsage(Base):
+    """사용자별 하루(한국 시간) 메시지 사용량.
+
+    메시지 기록과 따로 센다. 대화를 지워도 사용량은 줄지 않고,
+    AI 호출 전에 한 번의 SQL로 "한도 미만이면 1 증가"를 해서 동시 요청에도 한도를 넘지 않는다.
+    """
+
+    __tablename__ = "daily_usage"
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    day: Mapped[date] = mapped_column(Date, primary_key=True)  # 한국 날짜
+    count: Mapped[int] = mapped_column(Integer, default=0)

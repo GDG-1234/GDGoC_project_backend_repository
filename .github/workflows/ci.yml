@@ -47,7 +47,11 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --locked
-#      - name: 마이그레이션 head가 1개인지 확인
-#        run: test "$(uv run alembic heads | wc -l)" -eq 1
-#      - run: uv run alembic upgrade head
+      - name: 마이그레이션 head가 1개인지 확인
+        run: test "$(uv run alembic heads | wc -l)" -eq 1
+      - name: PostgreSQL에 마이그레이션 적용·되돌리기·재적용
+        run: |
+          uv run alembic upgrade head
+          uv run alembic downgrade base
+          uv run alembic upgrade head
       - run: uv run pytest

@@ -1,3 +1,4 @@
+import asyncio
 from collections.abc import Iterator
 
 import pytest
@@ -217,3 +218,54 @@ async def test_empty_message_is_rejected(client: AsyncClient) -> None:
 
     assert response.status_code == 400
     assert response.json()["error"]["code"] == "VALIDATION_ERROR"
+
+
+# ---- 검수 반영: 하루 사용량은 메시지 기록과 따로 센다 ----
+
+
+async def test_deleting_conversation_does_not_restore_daily_limit(
+    client: AsyncClient, settings: Settings
+) -> None:
+    settings.daily_message_limit = 1
+    conversation_id = await new_conversation(client)
+    url = f"/api/v1/conversations/{conversation_id}/messages"
+    await client.post(url, json={"content": "1"}, headers=ALICE)
+
+    await client.delete(f"/api/v1/conversations/{conversation_id}", headers=ALICE)
+    again = await client.post(
+        f"/api/v1/conversations/{await new_conversation(client)}/messages",
+        json={"content": "2"},
+        headers=ALICE,
+    )
+
+    assert again.status_code == 429
+    assert again.json()["error"]["code"] == "DAILY_LIMIT_EXCEEDED"
+
+
+async def test_concurrent_requests_cannot_share_last_slot(
+    client: AsyncClient, settings: Settings
+) -> None:
+    settings.daily_message_limit = 1
+    url = f"/api/v1/conversations/{await new_conversation(client)}/messages"
+
+    responses = await asyncio.gather(
+        *(client.post(url, json={"content": str(i)}, headers=ALICE) for i in range(3))
+    )
+
+    assert sorted(r.status_code for r in responses) == [201, 429, 429]
+
+
+async def test_ai_failure_does_not_use_daily_limit(
+    client: AsyncClient, ai: RecordingAi, settings: Settings
+) -> None:
+    settings.daily_message_limit = 1
+    url = f"/api/v1/conversations/{await new_conversation(client)}/messages"
+    ai.fail = True
+    failed = await client.post(url, json={"content": "1"}, headers=ALICE)
+
+    ai.fail = False
+    ok = await client.post(url, json={"content": "2"}, headers=ALICE)
+
+    assert failed.status_code == 502
+    assert ok.status_code == 201
+    assert ok.json()["remainingToday"] == 0
