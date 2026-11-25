@@ -3,6 +3,7 @@ import re
 from datetime import datetime, timedelta, timezone
 
 from fastapi import status
+from pydantic import ValidationError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.models import User
@@ -40,6 +41,35 @@ def guess_floor(room_number: str | None) -> int | None:
     return -floor if match["basement"] else floor
 
 
+FIELD_LABELS = {
+    "name": "과목명",
+    "day": "요일",
+    "start_time": "시작 시간",
+    "end_time": "끝 시간",
+    "building_name": "건물",
+    "room_number": "호실",
+    "room_description": "강의실 설명",
+    "weeks": "주차",
+    "room": "강의실",
+}
+
+
+def validation_message(exc: ValidationError) -> str:
+    """Pydantic 검증 오류를 사람이 읽을 문장으로 바꾼다."""
+    parts = []
+    for error in exc.errors(include_url=False):
+        field = str(error["loc"][0]) if error["loc"] else ""
+        label = FIELD_LABELS.get(field, field)
+        if error["type"] == "string_too_long":
+            max_length = (error.get("ctx") or {}).get("max_length")
+            parts.append(f"{label}은(는) {max_length}자 이하여야 합니다")
+        elif label:
+            parts.append(f"{label}: {error['msg']}")
+        else:
+            parts.append(str(error["msg"]).removeprefix("Value error, "))
+    return ", ".join(parts)
+
+
 def _filled(course: CourseInput) -> CourseInput:
     """엑셀 강의실 원문만 있고 건물·호실이 비어 있으면 원문에서 채운다."""
     if course.room and not (course.room_number or course.building_name):
@@ -52,6 +82,21 @@ def _filled(course: CourseInput) -> CourseInput:
             }
         )
     return course
+
+
+def _checked(course: CourseInput, label: str = "") -> CourseInput:
+    """원문에서 채운 값까지 포함해 다시 검증한다. 실패하면 400이고, 아무것도 저장하지 않는다.
+
+    model_copy는 검증을 하지 않아서, 원문에서 뽑은 호실·건물·설명이 길이 제한을 넘을 수 있다.
+    """
+    try:
+        return CourseInput.model_validate(_filled(course).model_dump())
+    except ValidationError as exc:
+        raise AppException(
+            status.HTTP_400_BAD_REQUEST,
+            "VALIDATION_ERROR",
+            f"{label}{validation_message(exc)}",
+        ) from exc
 
 
 def _to_course(course: CourseInput, course_id: int | None = None) -> Course:
@@ -101,7 +146,7 @@ async def get_timetable(session: AsyncSession, user: User) -> TimetableResponse:
 async def add_course(session: AsyncSession, user: User, body: CourseInput) -> Course:
     if await repository.count_courses(session, user.id) >= MAX_COURSES:
         raise _too_many()
-    model = TimetableCourse(user_id=user.id, **_filled(body).model_dump())
+    model = TimetableCourse(user_id=user.id, **_checked(body).model_dump())
     return _from_model(await repository.add_course(session, model))
 
 
@@ -109,7 +154,8 @@ async def update_course(
     session: AsyncSession, user: User, course_id: int, body: CourseInput
 ) -> Course:
     model = await _get_own_course(session, user, course_id)
-    updated = await repository.update_course(session, model, _filled(body).model_dump())
+    values = _checked(body).model_dump()  # 검증을 먼저 끝내고 바꾼다
+    updated = await repository.update_course(session, model, values)
     return _from_model(updated)
 
 
@@ -124,9 +170,12 @@ async def delete_course(session: AsyncSession, user: User, course_id: int) -> No
 def parse_timetable(text: str) -> ParseTimetableResponse:
     """붙여넣은 엑셀 시간표를 읽어 미리보기로 돌려준다. 저장하지 않는다."""
     result = parse_pasted_timetable(text)
-    courses = [
-        _to_course(
-            CourseInput(
+    warnings = list(result.warnings)
+    courses = []
+    # 수업 단위로 검증해서, 잘못된 수업은 빼고 경고로 알린다 (나머지 수업은 그대로 보여 준다).
+    for c in result.courses:
+        try:
+            course = CourseInput(
                 name=c.name[:100],
                 day=c.day,  # type: ignore[arg-type]  # 파서가 MON~SUN만 만든다
                 start_time=c.start_time,
@@ -137,19 +186,25 @@ def parse_timetable(text: str) -> ParseTimetableResponse:
                 building_name=c.building_name,
                 room_description=c.room_description,
             )
-        )
-        for c in result.courses
-    ]
-    return ParseTimetableResponse(courses=courses, warnings=result.warnings)
+        except ValidationError as exc:
+            when = f"{DAY_KO.get(c.day, c.day)} {c.start_time}~{c.end_time}"
+            warnings.append(
+                f"{when} '{c.name[:30]}' 수업을 건너뛰었습니다: {validation_message(exc)}"
+            )
+            continue
+        courses.append(_to_course(course))
+    return ParseTimetableResponse(courses=courses, warnings=warnings)
 
 
 async def save_timetable(
     session: AsyncSession, user: User, body: SaveTimetableRequest
 ) -> TimetableResponse:
-    """시간표 전체를 한 번에 바꾼다. 엑셀 미리보기를 확인한 뒤 등록할 때 쓴다."""
-    models = [
-        TimetableCourse(user_id=user.id, **_filled(course).model_dump()) for course in body.courses
-    ]
+    """시간표 전체를 한 번에 바꾼다. 엑셀 미리보기를 확인한 뒤 등록할 때 쓴다.
+
+    모든 수업을 먼저 검증한다. 하나라도 틀리면 400이고, 기존 시간표는 그대로 둔다.
+    """
+    checked = [_checked(course, f"{i}번째 수업: ") for i, course in enumerate(body.courses, 1)]
+    models = [TimetableCourse(user_id=user.id, **course.model_dump()) for course in checked]
     await repository.replace_courses(session, user.id, models)
     return await get_timetable(session, user)
 
@@ -258,6 +313,7 @@ async def next_course(
         return empty
 
     origin: NextOrigin | None = None
+    origin_course: Course | None = None  # 출발지가 수업 강의실일 때 그 수업 (층 비교용)
     if from_place_id is not None:
         place = navigation.get_place(from_place_id)
         if place is None:
@@ -274,6 +330,7 @@ async def next_course(
             found = _place_of(course)
             if found:
                 origin = NextOrigin(place_id=found[0], place_name=found[1], source=source)
+                origin_course = course
                 break
 
     route = None
@@ -283,7 +340,11 @@ async def next_course(
         route_error = "NO_LOCATION"
     elif origin is not None:
         if origin.place_id == destination[0]:
-            route_error = "SAME_PLACE"
+            # 같은 장소(보통 같은 건물 마커)라도 층이 다르면 층 사이를 옮겨야 한다.
+            # 그 층들의 길안내 데이터가 없어서 같은 마커로 묶인 것이므로 안내할 수 없다고 알린다.
+            from_floor = origin_course.floor if origin_course else None
+            moves_floor = None not in (from_floor, upcoming.floor) and from_floor != upcoming.floor
+            route_error = "FLOOR_ROUTE_UNAVAILABLE" if moves_floor else "SAME_PLACE"
         else:
             try:
                 route = navigation.route_between(
@@ -298,11 +359,21 @@ async def next_course(
     parts.append(
         f"다음 수업: {_when(upcoming, days_ahead, starts_in)} {upcoming.name} · {_where(upcoming)}"
     )
+    building = upcoming.location.building_name if upcoming.location else ""
     if route:
         minutes = max(1, math.ceil(route.summary.total_seconds / 60))
         parts.append(f"{origin.place_name if origin else ''}에서 걸어서 약 {minutes}분")
+        if upcoming.location and upcoming.location.precision == "BUILDING" and upcoming.floor:
+            label = navigation.floor_label(upcoming.floor)
+            parts.append(f"{label} 안내 데이터가 없어 {building}까지 안내합니다")
+    elif route_error == "FLOOR_ROUTE_UNAVAILABLE" and origin_course is not None:
+        parts.append(
+            f"같은 건물({building}) {navigation.floor_label(origin_course.floor or 0)} → "
+            f"{navigation.floor_label(upcoming.floor or 0)} 이동이에요. "
+            "층 사이 길안내 데이터는 아직 없습니다"
+        )
     elif route_error == "SAME_PLACE":
-        parts.append("지금 있는 건물에서 바로 이어지는 수업입니다")
+        parts.append("같은 곳에서 이어지는 수업입니다")
     elif route_error == "NO_LOCATION":
         parts.append("강의실 건물을 몰라 길안내를 할 수 없습니다")
     elif origin is None:

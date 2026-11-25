@@ -104,3 +104,14 @@ def test_parse_room(room: str | None, expected: tuple[str | None, ...]) -> None:
 )
 def test_guess_floor(number: str | None, floor: int | None) -> None:
     assert guess_floor(number) == floor
+
+
+@pytest.mark.parametrize("time", ["15:00-14:30", "10:00-10:00", "24:00-24:30", "09:60-10:30"])
+def test_invalid_time_row_is_skipped(time: str) -> None:
+    cell = '"과목\n301(혜화관 402-301 강의실)"'
+    text = f"09:00-09:30\t{cell}\n{time}\t{cell}\n"
+
+    result = parse_pasted_timetable(text)
+
+    assert summary(text) == [("MON", "09:00", "09:30", "과목")]
+    assert any("올바르지 않아" in w for w in result.warnings)

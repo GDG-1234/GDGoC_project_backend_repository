@@ -103,6 +103,9 @@ class NextCourseResponse(CamelModel):
     )
     route: RouteResponse | None = Field(description="출발지 → 다음 수업 장소 경로")
     route_error: str | None = Field(
-        description="경로를 못 만든 이유. 예: NO_ROUTE, NO_LOCATION(강의실 건물을 모름)"
+        description=(
+            "경로를 못 만든 이유. NO_LOCATION(강의실 건물을 모름), SAME_PLACE(같은 곳), "
+            "FLOOR_ROUTE_UNAVAILABLE(같은 건물 다른 층인데 층 사이 데이터 없음), NO_ROUTE 등"
+        )
     )
     message: str = Field(description="화면에 그대로 보여 줄 수 있는 한 줄 요약")

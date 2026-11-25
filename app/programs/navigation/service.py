@@ -268,6 +268,29 @@ def _exact_place(engine: Engine, name: str, building_id: int) -> PlaceSummary | 
     return next((p for p in places if p.name == name), None)
 
 
+def _floor_place(
+    engine: Engine, building: BuildingSummary, query: str, floor: int
+) -> PlaceSummary | None:
+    """그 층의 길안내 장소를 찾는다.
+
+    한 건물에 동이 나뉜 경우(사회과학관·경영관)는 층 장소 이름이 동 이름으로 되어 있다
+    (예: "경영관 2층"). 그래서 사용자가 쓴 이름 → 건물 이름 순으로 찾고, 그래도 없으면
+    동 이름(별칭) 중 그 층이 있는 곳이 하나뿐일 때만 고른다.
+    둘 이상이면 어느 동인지 몰라 고르지 않는다.
+    """
+    label = floor_label(floor)
+    for name in dict.fromkeys((f"{query} {label}", f"{building.name} {label}")):
+        place = _exact_place(engine, name, building.id)
+        if place is not None:
+            return place
+    by_alias = {
+        place.id: place
+        for alias in building.aliases
+        if (place := _exact_place(engine, f"{alias} {label}", building.id)) is not None
+    }
+    return next(iter(by_alias.values())) if len(by_alias) == 1 else None
+
+
 def locate_room(building_name: str | None, floor: int | None) -> RoomLocation | None:
     """건물 이름과 층을 길안내 장소로 바꾼다. 건물을 못 찾으면 None.
 
@@ -285,7 +308,7 @@ def locate_room(building_name: str | None, floor: int | None) -> RoomLocation | 
         return None
 
     if floor:
-        floor_place = _exact_place(engine, f"{building.name} {floor_label(floor)}", building.id)
+        floor_place = _floor_place(engine, building, building_name.strip(), floor)
         if floor_place is not None:
             return RoomLocation(
                 building_id=building.id,
