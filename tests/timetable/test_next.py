@@ -93,8 +93,48 @@ async def test_break_uses_previous_class_as_origin(
     assert body["next"]["name"] == "시스템소프트웨어"
     assert body["origin"]["source"] == "PREVIOUS_CLASS"
     assert body["origin"]["placeName"] == "신공학관"
-    # 다음 수업도 신공학관이라 이동할 경로가 없다
+    # 5145(5층) → 6119(6층): 같은 건물 마커지만 층을 옮겨야 하고, 그 층 데이터가 없다
+    assert body["routeError"] == "FLOOR_ROUTE_UNAVAILABLE"
+    assert body["route"] is None
+    assert "같은 건물(신공학관) 5층 → 6층 이동" in body["message"]
+
+
+async def test_same_floor_same_building_is_same_place(
+    client: AsyncClient, set_now: Callable
+) -> None:
+    base = {"day": "MON", "buildingName": "신공학관"}
+    for name, start, end, room in [
+        ("앞", "09:00", "10:00", "5145"),
+        ("뒤", "10:30", "11:30", "5101"),
+    ]:
+        course = {**base, "name": name, "startTime": start, "endTime": end, "roomNumber": room}
+        await client.post("/api/v1/timetables/me/courses", json=course, headers=ALICE)
+    set_now(kst(23, 10, 10))
+
+    body = await get_next(client)
+
     assert body["routeError"] == "SAME_PLACE"
+    assert "같은 곳에서 이어지는 수업" in body["message"]
+
+
+async def test_route_to_building_when_floor_has_no_data(
+    client: AsyncClient, set_now: Callable, timetable: None
+) -> None:
+    extra = {
+        "name": "교양",
+        "day": "MON",
+        "startTime": "18:00",
+        "endTime": "19:00",
+        "buildingName": "혜화관",
+        "roomNumber": "301",
+    }
+    await client.post("/api/v1/timetables/me/courses", json=extra, headers=ALICE)
+    set_now(kst(23, 17, 30))
+
+    body = await get_next(client)
+
+    assert body["next"]["location"]["precision"] == "BUILDING"
+    assert "3층 안내 데이터가 없어 혜화관까지 안내합니다" in body["message"]
 
 
 async def test_during_class_uses_current_class(

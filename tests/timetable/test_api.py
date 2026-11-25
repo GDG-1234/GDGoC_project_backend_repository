@@ -276,3 +276,94 @@ def test_locate_room_floor_with_data() -> None:
 def test_locate_room_unknown_building() -> None:
     assert locate_room("없는건물", 1) is None
     assert locate_room(None, 1) is None
+
+
+# ---- 검수 반영: 파생값 검증 (실패하면 아무것도 바뀌지 않는다) ----
+
+LONG_ROOM = "A" * 30 + "(신공학관 401-5145 강의실)"  # 원문에서 뽑은 호실이 20자를 넘는다
+
+
+async def test_add_rejects_room_with_too_long_derived_value(client: AsyncClient) -> None:
+    keep = await add(client, MANUAL)
+
+    response = await client.post(
+        COURSES,
+        json={**MANUAL, "room": LONG_ROOM, "roomNumber": None, "buildingName": None},
+        headers=ALICE,
+    )
+    mine = await client.get(MINE, headers=ALICE)
+
+    assert response.status_code == 400
+    assert response.json()["error"]["code"] == "VALIDATION_ERROR"
+    assert "호실" in response.json()["error"]["message"]
+    assert [c["id"] for c in mine.json()["courses"]] == [keep["id"]]
+
+
+async def test_update_rejects_too_long_derived_value_and_keeps_course(client: AsyncClient) -> None:
+    course = await add(client, MANUAL)
+    bad = {**MANUAL, "room": LONG_ROOM, "roomNumber": None, "buildingName": None}
+
+    response = await client.put(f"{COURSES}/{course['id']}", json=bad, headers=ALICE)
+    again = await client.put(
+        f"{COURSES}/{course['id']}", json={**MANUAL, "name": "수정됨"}, headers=ALICE
+    )
+
+    assert response.status_code == 400
+    assert again.status_code == 200
+    assert again.json()["name"] == "수정됨"
+
+
+async def test_save_all_rejects_bad_course_and_keeps_existing(client: AsyncClient) -> None:
+    keep = await add(client, MANUAL)
+    bad = {**MANUAL, "room": LONG_ROOM, "roomNumber": None, "buildingName": None}
+
+    response = await client.put(MINE, json={"courses": [MANUAL, bad]}, headers=ALICE)
+    mine = await client.get(MINE, headers=ALICE)
+
+    assert response.status_code == 400
+    assert response.json()["error"]["message"].startswith("2번째 수업: ")
+    assert [c["id"] for c in mine.json()["courses"]] == [keep["id"]]
+
+
+# ---- 검수 반영: 엑셀 미리보기는 잘못된 행만 빼고 보여 준다 ----
+
+CELL = '"1주차~15주차\n과목\n301(혜화관 402-301 강의실)"'
+
+
+async def test_parse_skips_reversed_time_row(client: AsyncClient) -> None:
+    text = f"09:00-09:30\t{CELL}\n15:00-14:30\t\t{CELL}\n"
+
+    body = await parse(client, text)
+
+    assert [(c["day"], c["startTime"]) for c in body["courses"]] == [("MON", "09:00")]
+    assert any("시간이 올바르지 않아" in w for w in body["warnings"])
+
+
+async def test_parse_skips_course_with_too_long_room(client: AsyncClient) -> None:
+    long_cell = '"과목B\n' + "A" * 30 + '(혜화관 402-301 강의실)"'
+    text = f"09:00-09:30\t{CELL}\t{long_cell}\n"
+
+    body = await parse(client, text)
+
+    assert [c["name"] for c in body["courses"]] == ["과목"]
+    assert any("과목B" in w and "호실" in w for w in body["warnings"])
+
+
+# ---- 검수 반영: 동이 나뉜 건물의 층 ----
+
+
+@pytest.mark.parametrize(
+    ("building", "floor", "place", "precision"),
+    [
+        ("경영관", 2, "경영관 2층", "FLOOR"),
+        ("사회과학관", 3, "사회과학관 3층", "FLOOR"),
+        # 통합 이름만으로는 어느 동인지 몰라 건물까지만
+        ("사회과학관·경영관", 2, "사회과학관·경영관", "BUILDING"),
+    ],
+)
+def test_locate_room_keeps_wing_name(building: str, floor: int, place: str, precision: str) -> None:
+    location = locate_room(building, floor)
+
+    assert location is not None
+    assert (location.place_name, location.precision) == (place, precision)
+    assert location.building_name == "사회과학관·경영관"

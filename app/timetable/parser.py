@@ -138,6 +138,12 @@ def parse_pasted_timetable(text: str) -> ParseResult:
             )
             continue
         start, end = _minutes(time[1], time[2]), _minutes(time[3], time[4])
+        in_day = all(int(time[i]) < 24 and int(time[i + 1]) < 60 for i in (1, 3))
+        if not in_day or end <= start:
+            result.warnings.append(
+                f"{line_no}번째 줄의 시간이 올바르지 않아 건너뛰었습니다: {row[0].strip()[:20]!r}"
+            )
+            continue
         for col, cell in enumerate(row[1:]):
             if not cell.strip():
                 continue
